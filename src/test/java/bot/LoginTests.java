@@ -29,7 +29,7 @@ public class LoginTests extends TestBase {
     @Test
     @DisplayName("Correct error message displayed for user with locked account.")
     public void shouldDenyAccessForLockedOutUser() {
-        bot.login(lockedOutUser, password);
+        bot.login(lockedOutUser, validPassword);
 
         Assertions.assertEquals(bot.getTextString(errorMessageContainer), lockedUserErrorMessage,
                 "Error message not displayed. User might have forbidden access");
@@ -51,7 +51,7 @@ public class LoginTests extends TestBase {
     @Test
     @DisplayName("Correct error displayed when username field is blank")
     public void shouldShowErrorWhenUsernameIsBlank() {
-        bot.login("", password);
+        bot.login("", validPassword);
 
         Assertions.assertEquals(emptyUsernameErrorMessage, bot.getTextString(errorMessageContainer));
 
@@ -61,7 +61,7 @@ public class LoginTests extends TestBase {
     @Test
     @DisplayName("User is returned back to login screen when logging out from the application")
     public void shouldBeOnLoginPageWhenLoggedOut() {
-        bot.login(standardUser, password);
+        bot.login(standardUser, validPassword);
         bot.click(logoutSidePanelSelector);
         bot.waitForElementToBeClickable(logoutButtonSelector);
         bot.click(logoutButtonSelector);
