@@ -6,10 +6,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class CartTests extends TestBase {
-    private final String sauceLabsBackpackAddSelector = "#add-to-cart-sauce-labs-backpack";
-    private final String sauceLabsBackpackRemoveSelector = "#remove-sauce-labs-backpack";
+    private final String backpackAddSelector = "#add-to-cart-sauce-labs-backpack";
+    private final String backpackRemoveSelector = "#remove-sauce-labs-backpack";
+    private final String cartBadge = "a.shopping_cart_link>span";
     private final String removeTextString = "Remove";
-    private final String listAdddToCartButtonsLandingPageSelector = "div>button[id*='add-to-cart']";
+    private final String listOfAllAddToCartButtons = "div>button[id*='add-to-cart']";
     private final int amountOfRemoveButtons = 6;
     private final String listRemoveFromCartButtonsLandingPAgeSelector = "div>button[id*='remove']";
 
@@ -17,15 +18,13 @@ public class CartTests extends TestBase {
     @Test
     @DisplayName("Verifying if 'Remove' button updates")
     public void adding_to_card_should_update_button_name() {
-
         bot.validLogin();
-
-        bot.waitForPresenceOfElementLocated(sauceLabsBackpackAddSelector);
-        bot.click(sauceLabsBackpackAddSelector);
-        bot.waitForPresenceOfElementLocated(sauceLabsBackpackRemoveSelector);
+        bot.waitForPresenceOfElementLocated(backpackAddSelector);
+        bot.click(backpackAddSelector);
+        bot.waitForPresenceOfElementLocated(backpackRemoveSelector);
 
         Assertions.assertEquals(removeTextString,
-                bot.getTextString(sauceLabsBackpackRemoveSelector),
+                bot.getTextString(backpackRemoveSelector),
                 "button state does not change");
     }
 
@@ -33,11 +32,42 @@ public class CartTests extends TestBase {
     @DisplayName("Verification if user can add all six products to the cart")
     public void verify_if_user_can_add_all_six_products_to_cart() {
         bot.validLogin();
-
-        int numberOfClicks = bot.loopClicker(bot.getElements(listAdddToCartButtonsLandingPageSelector));
+        int numberOfClicks = bot.loopClicker(bot.getElements(listOfAllAddToCartButtons));
 
         Assertions.assertEquals(numberOfClicks, amountOfRemoveButtons
                 , "difference between clicked buttons");
+
+    }
+
+    @Test
+    @DisplayName("Updates cart badge to 1 after adding one product")
+    public void shouldUpdateCartBadgeWhenAddingOneProduct() {
+        bot.validLogin();
+        bot.click(backpackAddSelector);
+
+        int expectedCartCount = 1;
+        int actualCartCount = Integer.parseInt(bot.getTextString(cartBadge));
+
+        Assertions.assertEquals(expectedCartCount, actualCartCount, "Badge value issue, value is not equal to 1");
+
+    }
+
+
+    @Test
+    @DisplayName("Updates cart badge to X after adding X products")
+    public void shouldUpdateCartBadgeCountWhenAddingFewProducts() {
+        bot.validLogin();
+
+        int expectedAmountOfItemsInCart = 4;
+        bot.addingProvidedAmountOfItemsToCart(bot.getElements(listOfAllAddToCartButtons)
+                , expectedAmountOfItemsInCart
+        );
+
+        int actualAmountOfItemsInCart = Integer.parseInt(bot.getTextString(cartBadge));
+
+        Assertions.assertEquals(expectedAmountOfItemsInCart, actualAmountOfItemsInCart
+                , "Values of items added to cart and badge value count does not match");
+
 
     }
 
@@ -47,7 +77,7 @@ public class CartTests extends TestBase {
 /*
 Koszyk
 1.
-Dodanie 1 produktu → badge koszyka = 1.
+Dodanie 1 produktu → badge koszyka = 1. - done
 2.
 Dodanie wielu produktów → badge koszyka rośnie zgodnie z liczbą.
 3.
