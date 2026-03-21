@@ -6,17 +6,20 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LoginTests extends TestBase {
-    private String standardUser = "standard_user";
-    private String lockedOutUser = "locked_out_user";
-    private String validPassword = "secret_sauce";
+    static final String standardUser = "standard_user";
+    static final String lockedOutUser = "locked_out_user";
+    static final String validPassword = "secret_sauce";
 
     private String errorMessageContainer = ".error-message-container";
     private String lockedUserErrorMessage = "Epic sadface: Sorry, this user has been locked out.";
     private String invalidPasswordErrorMessage = "Epic sadface: Username and password do not match any user in this service";
+    private String emptyUsernameErrorMessage = "Epic sadface: Username is required";
+    private String logoutSidePanelSelector = "#react-burger-menu-btn";
+    private String logoutButtonSelector = "#logout_sidebar_link";
 
     @Test
     @DisplayName("User logs in properly with correct credentials.")
-    public void verify_correct_login() {
+    public void shouldLoginSuccessfullyWithValidCredentials() {
         bot.login(standardUser, validPassword);
 
         Assertions.assertEquals(bot.getURL(), baseURL + "/inventory.html",
@@ -25,7 +28,7 @@ public class LoginTests extends TestBase {
 
     @Test
     @DisplayName("Correct error message displayed for user with locked account.")
-    public void verify_locked_user_should_not_have_access() {
+    public void shouldDenyAccessForLockedOutUser() {
         bot.login(lockedOutUser, password);
 
         Assertions.assertEquals(bot.getTextString(errorMessageContainer), lockedUserErrorMessage,
@@ -35,30 +38,37 @@ public class LoginTests extends TestBase {
 
     @Test
     @DisplayName("Correct error message displayed for user logging in with incorrect password.")
-    public void verify_error_for_user_with_wrong_password() {
-        bot.login(standardUser, "test123");
+    public void shouldShowErrorWhenPasswordIsIncorrect() {
+        bot.login(standardUser, "wrongPassword");
 
         Assertions.assertAll(
                 () -> Assertions.assertEquals(invalidPasswordErrorMessage, bot.getTextString(errorMessageContainer)),
-                () -> Assertions.assertEquals(baseURL, bot.getURL()));
+                () -> Assertions.assertEquals(baseURL + "/", bot.getURL()));
+
+    }
+
+
+    @Test
+    @DisplayName("Correct error displayed when username field is blank")
+    public void shouldShowErrorWhenUsernameIsBlank() {
+        bot.login("", password);
+
+        Assertions.assertEquals(emptyUsernameErrorMessage, bot.getTextString(errorMessageContainer));
+
+    }
+
+
+    @Test
+    @DisplayName("User is returned back to login screen when logging out from the application")
+    public void shouldBeOnLoginPageWhenLoggedOut() {
+        bot.login(standardUser, password);
+        bot.click(logoutSidePanelSelector);
+        bot.waitForElementToBeClickable(logoutButtonSelector);
+        bot.click(logoutButtonSelector);
+
+        Assertions.assertEquals(baseURL + "/", bot.getURL(), "User is not transited to login page");
 
     }
 
 
 }
-
-/*
-Login
-1.
-Logowanie poprawne: standard_user / secret_sauce → przejście na listę produktów. (slqa.ru) - done
-2.
-Logowanie zablokowane: locked_out_user / secret_sauce → komunikat o blokadzie. (slqa.ru) - done
-3.
-Logowanie z innymi userami testowymi: problem_user, performance_glitch_user, error_user, visual_user → wejście do aplikacji lub specyficzne zachowanie (warto asercje dopasować do faktycznego zachowania). (slqa.ru)
-4.
-Błędne hasło dla poprawnego loginu → błąd walidacji.
-5.
-Puste pola login/hasło → błąd walidacji.
-6.
-Logout z menu → powrót na ekran logowania.
- */
