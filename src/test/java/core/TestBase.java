@@ -28,6 +28,8 @@ public class TestBase {
         driver = new ChromeDriver(options);
         bot = new ActionBot(driver, baseURL);
         driver.get(baseURL);
+
+
     }
 
     @AfterEach
