@@ -18,6 +18,8 @@ public class CartTests extends TestBase {
     @DisplayName("Verifying if 'Remove' button updates")
     public void adding_to_card_should_update_button_name() {
 
+        bot.validLogin();
+
         bot.waitForPresenceOfElementLocated(sauceLabsBackpackAddSelector);
         bot.click(sauceLabsBackpackAddSelector);
         bot.waitForPresenceOfElementLocated(sauceLabsBackpackRemoveSelector);
@@ -30,6 +32,8 @@ public class CartTests extends TestBase {
     @Test
     @DisplayName("Verification if user can add all six products to the cart")
     public void verify_if_user_can_add_all_six_products_to_cart() {
+        bot.validLogin();
+
         int numberOfClicks = bot.loopClicker(bot.getElements(listAdddToCartButtonsLandingPageSelector));
 
         Assertions.assertEquals(numberOfClicks, amountOfRemoveButtons

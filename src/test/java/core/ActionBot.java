@@ -16,6 +16,8 @@ public class ActionBot {
     protected String firstName = "Antoni";
     protected String lastName = "Kowalski";
     protected String postalCode = "123456";
+    static final String standardUser = "standard_user";
+    static final String validPassword = "secret_sauce";
 
     public ActionBot(WebDriver driver, String baseURL) {
         this.driver = driver;
@@ -24,6 +26,15 @@ public class ActionBot {
 
 
     //Methods
+
+    public void validLogin(){
+        driver.findElement(By.cssSelector("#user-name"))
+                .sendKeys(standardUser);
+        driver.findElement(By.cssSelector("#password"))
+                .sendKeys(validPassword);
+        driver.findElement(By.cssSelector("#login-button"))
+                .click();
+    }
 
     public void click(String cssSelector) {
         driver.findElement(By.cssSelector(cssSelector)).click();
