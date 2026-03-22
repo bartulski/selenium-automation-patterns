@@ -18,7 +18,6 @@ public class CartTests extends TestBase {
     private final String cartButton = ".shopping_cart_container";
     private final String cartBadgeProductsCount = "a.shopping_cart_link>span";
 
-
     private final String removeTextString = "Remove";
 
     private final int amountOfRemoveButtons = 6;
