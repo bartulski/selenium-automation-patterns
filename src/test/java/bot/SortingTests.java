@@ -35,6 +35,7 @@ public class SortingTests extends TestBase {
         bot.click(sortingContainer);
         bot.click(sortAtoZButton);
 
+
         List<WebElement> headersList = bot.getElements(listProductsHeaders);
         List<String> actualHeadersList = new ArrayList<>();
 
@@ -77,6 +78,7 @@ public class SortingTests extends TestBase {
         bot.click(sortingContainer);
         bot.click(sortPriceLtoHButton);
         bot.waitTextToBePresentInElementLocated(sortingContainerSelectedValue, "Price (low to high)");
+        bot.waitForPresenceOfElementLocated(listProductPrices);
 
         String selectedOption = bot.getTextString(sortingContainerSelectedValue).trim();
         Assertions.assertEquals("Price (low to high)", selectedOption
