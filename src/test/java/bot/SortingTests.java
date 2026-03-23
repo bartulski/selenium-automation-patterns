@@ -42,9 +42,9 @@ public class SortingTests extends TestBase {
             actualHeadersList.add(header.getText().trim());
         }
 
-        List<String> expectedSortedHeadersList = new ArrayList<>(actualHeadersList);
-        expectedSortedHeadersList.sort(String.CASE_INSENSITIVE_ORDER);
-        Assertions.assertEquals(expectedSortedHeadersList, actualHeadersList, "Products are not sorted by name A to Z");
+        List<String> expectedHeadersList = new ArrayList<>(actualHeadersList);
+        expectedHeadersList.sort(String.CASE_INSENSITIVE_ORDER);
+        Assertions.assertEquals(expectedHeadersList, actualHeadersList, "Products are not sorted by name A to Z");
 
     }
 
@@ -67,9 +67,9 @@ public class SortingTests extends TestBase {
             actualHeadersList.add(header.getText().trim());
         }
 
-        List<String> expectedSortedHeaderList = new ArrayList<>(actualHeadersList);
-        expectedSortedHeaderList.sort(String.CASE_INSENSITIVE_ORDER.reversed());
-        Assertions.assertEquals(expectedSortedHeaderList, actualHeadersList, "Products are not sorted by name Z to A");
+        List<String> expectedHeaderList = new ArrayList<>(actualHeadersList);
+        expectedHeaderList.sort(String.CASE_INSENSITIVE_ORDER.reversed());
+        Assertions.assertEquals(expectedHeaderList, actualHeadersList, "Products are not sorted by name Z to A");
     }
 
 
