@@ -14,9 +14,6 @@ public class ActionBot {
     private final WebDriver driver;
     private final String baseURL;
     private WebDriverWait wait;
-    protected String firstName = "Antoni";
-    protected String lastName = "Kowalski";
-    protected String postalCode = "123456";
     protected final String standardUser = "standard_user";
     protected final String validPassword = "secret_sauce";
 
