@@ -1,9 +1,11 @@
 package bot;
 
-import core.TestBase;
+import bot.core.TestBase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.math.BigDecimal;
 
 public class E2ETests extends TestBase {
     private final String sauceLabsBackpackAddSelector = "#add-to-cart-sauce-labs-backpack";
