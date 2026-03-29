@@ -20,7 +20,7 @@ public class E2ETests extends TestBase {
 
     @Test
     @DisplayName("E2E buying process check with amount calculation")
-    public void verifying_e2e_scenario_Buying_one_item() {
+    public void completeE2EBuyingProcess() {
 
         bot.validLogin();
         bot.waitForPresenceOfElementLocated(sauceLabsBackpackAddSelector);
