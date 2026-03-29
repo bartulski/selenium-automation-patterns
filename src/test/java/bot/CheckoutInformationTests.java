@@ -23,6 +23,7 @@ public class CheckoutInformationTests extends TestBase {
         bot.click(cartButtonSelector);
         bot.click(checkoutButtonSelector);
         bot.waitForPresenceOfElementLocated(continueButtonSelector);
+
     }
 
     @Test
@@ -48,6 +49,7 @@ public class CheckoutInformationTests extends TestBase {
                         + expectedDisplayedIconsNumber + "."
                         + "Displayed : "
                         + bot.getElements(errorIconsSelector).size() + ".");
+
     }
 
 
@@ -75,6 +77,7 @@ public class CheckoutInformationTests extends TestBase {
         Assertions.assertEquals(expectedErrorText,
                 bot.getTextString(errorMessageTextSelector)
                 ,"Error message displayed for empty Last Name field is not correct");
+
     }
 
     @Test
@@ -89,5 +92,6 @@ public class CheckoutInformationTests extends TestBase {
         Assertions.assertEquals(expectedErrorText,
                 bot.getTextString(errorMessageTextSelector)
                 ,"Error message displayed for empty Postal Code field is not correct");
+
     }
 }
