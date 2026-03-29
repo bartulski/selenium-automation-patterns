@@ -34,10 +34,16 @@ public class ActionBot {
     }
     public String getTextString(String cssSelector) {
         return driver.findElement(By.cssSelector(cssSelector)).getText();
+
     }
     public void sendKeys(String cssSelector, String string) {
         driver.findElement(By.cssSelector(cssSelector)).sendKeys(string);
 
+    }
+
+    public boolean elementIsDisplayed(String cssSelector) {
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(cssSelector)));
+        return driver.findElement(By.cssSelector(cssSelector)).isDisplayed();
     }
 
     //Clicks
@@ -53,7 +59,6 @@ public class ActionBot {
             waitForElementToBeClickable(element);
             i++;
             element.click();
-
         }
         return i;
     }
@@ -63,7 +68,7 @@ public class ActionBot {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(cssSelector)));
     }
 
-    public void waitForDomAtribute(String cssSelector, String attribute, String value) {
+    public void waitForDomAttribute(String cssSelector, String attribute, String value) {
         wait.until(ExpectedConditions.domAttributeToBe(driver.findElement(By.cssSelector(cssSelector)), attribute, value));
     }
 
@@ -109,7 +114,6 @@ public class ActionBot {
     }
 
     //TestMethods
-
     public int addingProvidedAmountOfItemsToCart(List<WebElement> cssSelector, int amountOfItemsToBeAdded) {
         if (amountOfItemsToBeAdded < 1 || amountOfItemsToBeAdded > cssSelector.size()) {
             throw new IllegalArgumentException(
@@ -123,6 +127,5 @@ public class ActionBot {
             cssSelector.get(i).click();
         } return clicksCount;
     }
-
 
 }
