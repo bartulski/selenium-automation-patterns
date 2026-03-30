@@ -31,7 +31,6 @@ public class CartTests extends TestBase {
         Assertions.assertEquals(removeTextString,
                 bot.getTextString(backpackRemoveSelector),
                 "Button state does not change");
-
     }
 
     @Test
@@ -47,7 +46,6 @@ public class CartTests extends TestBase {
                 amountOfRemoveButtons,
                 "difference between clicked buttons"
         );
-
     }
 
     @Test
@@ -64,7 +62,6 @@ public class CartTests extends TestBase {
                 "Badge value issue, value is not equal to " +
                         expectedCartCount
         );
-
     }
 
 
@@ -85,9 +82,7 @@ public class CartTests extends TestBase {
                 , actualAmountOfItemsInCart
                 , "Values of items added to cart and badge value count does not match"
         );
-
     }
-
 
     @Test
     @DisplayName("Removing added products update cart badge count")
@@ -106,8 +101,6 @@ public class CartTests extends TestBase {
                 , actualAmountOfItemsInCart
                 , "Amount of items in cart does not match"
         );
-
-
     }
 
     @Test
@@ -123,7 +116,6 @@ public class CartTests extends TestBase {
                 , actualItemsInCart
                 , "Count of items in cart does not match"
         );
-
     }
 
 }
