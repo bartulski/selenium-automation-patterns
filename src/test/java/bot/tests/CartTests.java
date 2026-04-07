@@ -1,4 +1,4 @@
-package bot;
+package bot.tests;
 
 import bot.core.TestBase;
 import org.junit.jupiter.api.Assertions;
@@ -40,6 +40,7 @@ public class CartTests extends TestBase {
         int numberOfClicks = bot.clickAllElementsReturnNumberOfClicks(
                 bot.getElements(listOfAllAddToCartButtons)
         );
+
         final int amountOfRemoveButtons = 6;
 
         Assertions.assertEquals(numberOfClicks,

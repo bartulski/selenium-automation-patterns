@@ -1,4 +1,4 @@
-package bot;
+package bot.tests;
 
 import bot.core.TestBase;
 import org.junit.jupiter.api.Assertions;
@@ -23,7 +23,6 @@ public class CheckoutInformationTests extends TestBase {
         bot.click(cartButtonSelector);
         bot.click(checkoutButtonSelector);
         bot.waitForPresenceOfElementLocated(continueButtonSelector);
-
     }
 
     @Test
@@ -33,7 +32,6 @@ public class CheckoutInformationTests extends TestBase {
         bot.waitForPresenceOfElementLocated(errorMessageContainerSelector);
         Assertions.assertTrue(bot.elementIsDisplayed(errorMessageContainerSelector)
                 , "Error message container is not displayed when provided empty data");
-
     }
 
     @Test
@@ -49,9 +47,7 @@ public class CheckoutInformationTests extends TestBase {
                         + expectedDisplayedIconsNumber + "."
                         + "Displayed : "
                         + bot.getElements(errorIconsSelector).size() + ".");
-
     }
-
 
     @Test
     void shouldDisplayCorrectErrorWhenFirstNameIsEmpty() {
@@ -63,7 +59,6 @@ public class CheckoutInformationTests extends TestBase {
         Assertions.assertEquals(expectedErrorText,
                 bot.getTextString(errorMessageTextSelector)
                 ,"Error message displayed for empty First Name field is not correct");
-
     }
 
     @Test
@@ -77,7 +72,6 @@ public class CheckoutInformationTests extends TestBase {
         Assertions.assertEquals(expectedErrorText,
                 bot.getTextString(errorMessageTextSelector)
                 ,"Error message displayed for empty Last Name field is not correct");
-
     }
 
     @Test
@@ -92,6 +86,5 @@ public class CheckoutInformationTests extends TestBase {
         Assertions.assertEquals(expectedErrorText,
                 bot.getTextString(errorMessageTextSelector)
                 ,"Error message displayed for empty Postal Code field is not correct");
-
     }
 }

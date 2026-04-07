@@ -1,4 +1,4 @@
-package bot;
+package bot.tests;
 
 import bot.core.TestBase;
 import org.junit.jupiter.api.Assertions;
@@ -11,9 +11,6 @@ public class LoginTests extends TestBase {
     static final String validPassword = "secret_sauce";
 
     private final String errorMessageContainer = ".error-message-container";
-    private final String lockedUserErrorMessage = "Epic sadface: Sorry, this user has been locked out.";
-    private final String invalidPasswordErrorMessage = "Epic sadface: Username and password do not match any user in this service";
-    private final String emptyUsernameErrorMessage = "Epic sadface: Username is required";
     private final String logoutSidePanelSelector = "#react-burger-menu-btn";
     private final String logoutButtonSelector = "#logout_sidebar_link";
 
@@ -32,12 +29,12 @@ public class LoginTests extends TestBase {
     @DisplayName("Correct error message displayed for user with locked account.")
     public void shouldDenyAccessForLockedOutUser() {
         bot.login(lockedOutUser, validPassword);
+        final String expectedErrorMessage = "Epic sadface: Sorry, this user has been locked out.";
 
         Assertions.assertEquals(
                 bot.getTextString(errorMessageContainer),
-                lockedUserErrorMessage,
+                expectedErrorMessage,
                 "Error message not displayed. User might have forbidden access");
-
     }
 
     @Test
@@ -45,22 +42,24 @@ public class LoginTests extends TestBase {
     public void shouldShowErrorWhenPasswordIsIncorrect() {
         bot.login(standardUser, "wrongPassword");
 
+        final String expectedErrorMessage = "Epic sadface: Username and password do not match any user in this service";
+
         Assertions.assertAll(
-                () -> Assertions.assertEquals(invalidPasswordErrorMessage, bot.getTextString(errorMessageContainer)),
+                () -> Assertions.assertEquals(expectedErrorMessage, bot.getTextString(errorMessageContainer)),
                 () -> Assertions.assertEquals(baseURL + "/", bot.getURL()));
-
     }
-
 
     @Test
     @DisplayName("Correct error displayed when username field is blank")
     public void shouldShowErrorWhenUsernameIsBlank() {
         bot.login("", validPassword);
 
-        Assertions.assertEquals(emptyUsernameErrorMessage, bot.getTextString(errorMessageContainer));
+        final String expectedErrorMessage = "Epic sadface: Username is required";
 
+        Assertions.assertEquals(expectedErrorMessage
+                , bot.getTextString(errorMessageContainer)
+        );
     }
-
 
     @Test
     @DisplayName("User is returned back to login screen when logging out from the application")
@@ -70,9 +69,9 @@ public class LoginTests extends TestBase {
         bot.waitForElementToBeClickable(logoutButtonSelector);
         bot.click(logoutButtonSelector);
 
-        Assertions.assertEquals(baseURL + "/", bot.getURL(), "User is not transited to login page");
-
+        Assertions.assertEquals(baseURL + "/"
+                , bot.getURL()
+                , "User is not transited to login page"
+        );
     }
-
-
 }

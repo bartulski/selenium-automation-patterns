@@ -15,7 +15,6 @@ public class TestBase {
 
     protected final String baseURL = "https://www.saucedemo.com";
 
-
     @BeforeEach
     public void setup() {
         ChromeOptions options = new ChromeOptions();
@@ -23,19 +22,14 @@ public class TestBase {
         prefs.put("profile.password_manager_enabled", false);
         prefs.put("credentials_enable_service", false);
         prefs.put("profile.password_manager_leak_detection", false);
-
         options.setExperimentalOption("prefs", prefs);
         driver = new ChromeDriver(options);
         bot = new ActionBot(driver, baseURL);
         driver.get(baseURL);
-
-
     }
 
     @AfterEach
     public void quit() {
         driver.quit();
     }
-
-
 }

@@ -1,4 +1,4 @@
-package bot;
+package bot.tests;
 
 import bot.core.TestBase;
 import org.junit.jupiter.api.Assertions;
@@ -19,7 +19,7 @@ public class E2ETests extends TestBase {
     protected final String checkOutCompletedURL = "https://www.saucedemo.com/checkout-complete.html";
 
     @Test
-    @DisplayName("E2E buying process check with amount calculation")
+    @DisplayName("E2E buying process check with total amount calculation")
     public void completeE2EBuyingProcess() {
 
         bot.validLogin();
@@ -38,13 +38,12 @@ public class E2ETests extends TestBase {
         double orderSumDouble = actualValueDouble + taxValueDouble;
         String orderSumString = String.valueOf(orderSumDouble);
 
-        Assertions.assertEquals("32.39", orderSumString,
-                "Amount of Order Value + Tax value does not match");
+        Assertions.assertEquals("32.39", orderSumString
+                ,"Amount of Order Value + Tax value does not match");
 
         bot.click(finishButtonSelector);
 
         Assertions.assertEquals(checkOutCompletedURL, bot.getURL()
                 , "Finish page site URL does not match, order not completed");
     }
-
 }

@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pom.helpers.ConfigurationReader;
+
 import java.time.Duration;
 import java.util.List;
 
@@ -26,19 +28,22 @@ public class ActionBot {
     public WebElement getElement(String cssSelector) {
         return driver.findElement(By.cssSelector(cssSelector));
     }
+
     public List<WebElement> getElements(String cssSelector) {
         return driver.findElements(By.cssSelector(cssSelector));
     }
+
     public String getURL() {
         return driver.getCurrentUrl();
     }
+
     public String getTextString(String cssSelector) {
         return driver.findElement(By.cssSelector(cssSelector)).getText();
 
     }
+
     public void sendKeys(String cssSelector, String string) {
         driver.findElement(By.cssSelector(cssSelector)).sendKeys(string);
-
     }
 
     public boolean elementIsDisplayed(String cssSelector) {
@@ -50,7 +55,6 @@ public class ActionBot {
     public void click(String cssSelector) {
         waitForElementToBeClickable(cssSelector);
         driver.findElement(By.cssSelector(cssSelector)).click();
-
     }
 
     public int clickAllElementsReturnNumberOfClicks(List<WebElement> cssSelector) {
@@ -72,9 +76,10 @@ public class ActionBot {
         wait.until(ExpectedConditions.domAttributeToBe(driver.findElement(By.cssSelector(cssSelector)), attribute, value));
     }
 
-    public void waitTextToBePresentInElementLocated(String cssSelector,String textValue) {
-        wait.until(ExpectedConditions.textToBePresentInElementLocated(By.cssSelector(cssSelector),textValue));
+    public void waitTextToBePresentInElementLocated(String cssSelector, String textValue) {
+        wait.until(ExpectedConditions.textToBePresentInElementLocated(By.cssSelector(cssSelector), textValue));
     }
+
     public void waitForElementToBeClickable(String cssSelector) {
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(cssSelector)));
     }
@@ -118,14 +123,14 @@ public class ActionBot {
         if (amountOfItemsToBeAdded < 1 || amountOfItemsToBeAdded > cssSelector.size()) {
             throw new IllegalArgumentException(
                     "amountOfItemsToBeAdded value must be between 1 and " + cssSelector.size() + "."
-                    + "Provided test amount was : " + amountOfItemsToBeAdded);
+                            + "Provided test amount was : " + amountOfItemsToBeAdded);
         }
 
         int clicksCount = Math.min(amountOfItemsToBeAdded, cssSelector.size());
 
         for (int i = 0; i < clicksCount; i++) {
             cssSelector.get(i).click();
-        } return clicksCount;
+        }
+        return clicksCount;
     }
-
 }
