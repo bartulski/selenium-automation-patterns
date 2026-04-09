@@ -8,7 +8,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pom.components.StoreNotice;
 import pom.helpers.ConfigurationReader;
-import pom.helpers.WindowHelper;
 
 import java.math.BigDecimal;
 import java.time.Duration;
@@ -20,7 +19,6 @@ public abstract class BasePage {
     protected final int waitValueInSeconds;
     protected WebDriverWait wait;
     protected StoreNotice storeNotice;
-    protected WindowHelper windowHelper;
 
     protected BasePage(WebDriver driver) {
         this.driver = driver;
@@ -28,7 +26,6 @@ public abstract class BasePage {
         this.waitValueInSeconds = new ConfigurationReader().getWait();
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(waitValueInSeconds));
         this.storeNotice = new StoreNotice(driver, waitValueInSeconds);
-        this.windowHelper = new WindowHelper(driver, waitValueInSeconds);
     }
 
     protected void clickElement(By cssSelector){
@@ -50,10 +47,6 @@ public abstract class BasePage {
 
     protected void waitForElementVisibility(By cssSelector) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(cssSelector));
-    }
-
-    protected void waitForNumberOfWindowsToBe(int numberOfWindows){
-        wait.until(ExpectedConditions.numberOfWindowsToBe(numberOfWindows));
     }
 
     protected void hoverOverElement(By cssSelector) {
