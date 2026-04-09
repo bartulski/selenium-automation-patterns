@@ -19,8 +19,6 @@ public class ProductPage extends BasePage {
     private final By quantityInputField = By.cssSelector("input[name='quantity']");
     private final By blockUIOverlay = By.cssSelector(".blockOverlay");
     private final By productMaxQuantity = By.cssSelector(".summary .stock");
-    private final By addToWishlistButton = By.cssSelector(".add_to_wishlist");
-    private final By wishListButton = By.cssSelector("#menu-item-248");
 
     public ProductPage(WebDriver driver) {
         super(driver);
@@ -92,19 +90,5 @@ public class ProductPage extends BasePage {
         boolean isValid = (Boolean) ((JavascriptExecutor) driver)
                 .executeScript("return arguments[0].checkValidity();", quantityField);
         return isValid;
-    }
-
-    public ProductPage addProductToWishList() {
-        clickElement(addToWishlistButton);
-        waitForElementToDisappear(blockUIOverlay);
-        return this;
-    }
-
-    public WishlistPage goToWishlistPage() {
-        String originalWindow = driver.getWindowHandle();
-        clickElement(wishListButton);
-
-        windowHelper.switchToNewWindow(originalWindow);
-        return new WishlistPage(driver);
     }
 }
