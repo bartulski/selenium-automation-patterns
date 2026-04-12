@@ -18,7 +18,7 @@ public class ProductTests extends BaseTest {
 
         ProductPage productPage =
                 homePage.goToHomePage()
-                        .goToWindsurfingPage()
+                        .goToWindsurfingProductPage()
                         .addProductToCart();
 
         BigDecimal expectedProductPrice = productPage.readProductPrice();
@@ -40,7 +40,7 @@ public class ProductTests extends BaseTest {
     @Test
     void shouldRecalculateTotalPriceWhenChangingQuantity() {
         ProductPage productPage = new ProductPage(driver)
-                .openToProductPage(windsurfingSlug);
+                .openProductPage(windsurfingSlug);
 
         BigDecimal actualProductPrice = productPage.readProductPrice();
 
@@ -61,7 +61,7 @@ public class ProductTests extends BaseTest {
         int quantityNegativeValue = -1;
 
         ProductPage productPage = new ProductPage(driver)
-                .openToProductPage(windsurfingSlug)
+                .openProductPage(windsurfingSlug)
                 .setRawQuantity(quantityNegativeValue)
                 .clickAddToCart();
 

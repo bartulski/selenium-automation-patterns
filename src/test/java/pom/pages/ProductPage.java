@@ -26,8 +26,8 @@ public class ProductPage extends BasePage {
         super(driver);
     }
 
-    public ProductPage openToProductPage(String productSlug) {
-        this.goToProductPage(productSlug);
+    public ProductPage openProductPage(String productSlug) {
+        goToProductPage(productSlug);
         return this;
     }
 
@@ -51,7 +51,7 @@ public class ProductPage extends BasePage {
     }
 
     public BigDecimal readTotalCartAmountOnDropdown() {
-        hoverOverElement(cartHeader);
+        hoverOver(cartHeader);
         return convertStringToBigDecimal(cartTotalPriceOnDropdown);
     }
 
@@ -69,14 +69,14 @@ public class ProductPage extends BasePage {
         }
 
         sendKeys(quantityInputField, String.valueOf(productsAmount));
-        waitForToDisappear(blockUIOverlay);
+        waitForDisappear(blockUIOverlay);
         return this;
     }
 
     public ProductPage setRawQuantity(int productsAmount) {
         clearInputField(quantityInputField);
         sendKeys(quantityInputField, String.valueOf(productsAmount));
-        waitForToDisappear(blockUIOverlay);
+        waitForDisappear(blockUIOverlay);
         return this;
     }
 
@@ -88,9 +88,9 @@ public class ProductPage extends BasePage {
         return isValid;
     }
 
-    public ProductPage addProductToWishList() {
+    public ProductPage addProductToWishlist() {
         clickElement(addToWishlistButton);
-        waitForToDisappear(blockUIOverlay);
+        waitForDisappear(blockUIOverlay);
         return this;
     }
 

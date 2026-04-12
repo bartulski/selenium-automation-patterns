@@ -44,7 +44,7 @@ public abstract class BasePage {
         element.click();
     }
 
-    protected void hoverOverElement(By cssSelector) {
+    protected void hoverOver(By cssSelector) {
         WebElement elementToHover = waitUtils.waitForVisibility(cssSelector);
         new Actions(driver).moveToElement(elementToHover).perform();
     }
@@ -55,8 +55,8 @@ public abstract class BasePage {
 
     protected BigDecimal convertStringToBigDecimal(By cssSelector) {
         waitUtils.waitForVisibility(cssSelector);
-        String readedString = readText(cssSelector).replaceAll("[^\\d,.-]", "");
-        return new BigDecimal(readedString.replace(",", "."));
+        String readString = readText(cssSelector).replaceAll("[^\\d,.-]", "");
+        return new BigDecimal(readString.replace(",", "."));
     }
 
     protected void clearInputField(By cssSelector) {
@@ -75,7 +75,7 @@ public abstract class BasePage {
     }
 
     //domen waits
-    public void waitForToDisappear(By cssSelector) {
+    public void waitForDisappear(By cssSelector) {
         wait.until(ExpectedConditions.numberOfElementsToBe(cssSelector, 0));
     }
     public WebElement waitForVisibility(By locator) {

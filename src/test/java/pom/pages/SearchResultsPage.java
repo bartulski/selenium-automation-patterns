@@ -18,7 +18,7 @@ public class SearchResultsPage extends BasePage {
         super(driver);
     }
 
-    public boolean checkSearchKeyWord(String searchKeyWord) {
+    public boolean containsResultsMatchingKeyword(String searchKeyWord) {
         waitForVisibility(productsContainer);
 
         List<WebElement> productsTitles = driver.findElements(listOfAllProductTitles);

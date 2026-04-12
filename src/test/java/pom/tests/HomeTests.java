@@ -30,7 +30,7 @@ public class HomeTests extends BaseTest {
                         , "Page title is incorrect"
                 ),
                 () -> Assertions.assertTrue(
-                        (homePage.hasProductsCategories()),
+                        (homePage.hasProductCategories()),
                         "Categories with products are not displayed")
         );
     }

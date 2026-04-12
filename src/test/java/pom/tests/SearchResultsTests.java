@@ -15,9 +15,9 @@ public class SearchResultsTests extends BaseTest {
 
         SearchResultsPage searchResultsPage = new HomePage(driver)
                 .goToHomePage()
-                .searchForProduct(searchKeyWord);
+                .searchFor(searchKeyWord);
 
-        Assertions.assertTrue(searchResultsPage.checkSearchKeyWord(searchKeyWord)
+        Assertions.assertTrue(searchResultsPage.containsResultsMatchingKeyword(searchKeyWord)
         ,"Products on the search list do not match searched keyword");
     }
 }

@@ -57,7 +57,7 @@ public class CategoryPage extends BasePage {
         for (WebElement element : buttons) {
             waitToBeClickable(element);
             element.click();
-            waitForToDisappear(blockUIOverlay);
+            waitForDisappear(blockUIOverlay);
         }
         return this;
     }

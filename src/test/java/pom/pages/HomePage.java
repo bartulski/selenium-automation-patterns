@@ -3,7 +3,6 @@ package pom.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import pom.core.BasePage;
 
 import java.math.BigDecimal;
@@ -30,7 +29,7 @@ public class HomePage extends BasePage {
 
     public HomePage addWindsurfingProductToCart() {
         clickElement(addWindsurfingButton);
-        waitForToDisappear(addWindsurfingLoadingIcon);
+        waitForDisappear(addWindsurfingLoadingIcon);
         return this;
     }
 
@@ -50,22 +49,22 @@ public class HomePage extends BasePage {
         return driver.getTitle();
     }
 
-    public boolean hasProductsCategories() {
+    public boolean hasProductCategories() {
         waitForVisibility(productCategories);
         return !driver.findElements(productCategories).isEmpty();
     }
 
-    public ProductPage goToWindsurfingPage() {
+    public ProductPage goToWindsurfingProductPage() {
         clickElement(windsurfingProductPageButton);
         return new ProductPage(driver);
     }
 
-    public CartPage goToCart() {
+    public CartPage goToCartPage() {
         clickElement(cartButton);
         return new CartPage(driver);
     }
 
-    public SearchResultsPage searchForProduct(String searchKeyWord) {
+    public SearchResultsPage searchFor(String searchKeyWord) {
         sendKeys(searchTextField, searchKeyWord);
         driver.findElement(searchTextField).sendKeys(Keys.ENTER);
         waitUtils.waitForURLContains(searchKeyWord);

@@ -24,7 +24,7 @@ public class CartPage extends BasePage  {
         super(driver);
     }
 
-    public boolean isEmptyCartNotificationDisplayed() {
+    public boolean isEmptyCartMessageDisplayed() {
         return waitForVisibility(emptyCartNotification).isDisplayed();
     }
 
@@ -45,20 +45,20 @@ public class CartPage extends BasePage  {
 
     public CartPage updateCart() {
         clickElement(updateCartButton);
-        waitForToDisappear(blockUWrapper);
+        waitForDisappear(blockUWrapper);
         return this;
     }
 
     public CartPage applyCoupon(String couponCode) {
         sendKeys(couponInputField, couponCode);
         clickElement(couponApplyButton);
-        waitForToDisappear(blockUWrapper);
+        waitForDisappear(blockUWrapper);
         return this;
     }
 
     public CartPage removeProductFromCart() {
         clickElement(removeProductButton);
-        waitForToDisappear(blockUWrapper);
+        waitForDisappear(blockUWrapper);
         return this;
     }
 

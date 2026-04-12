@@ -6,7 +6,6 @@ import pom.core.BaseTest;
 import pom.pages.CartPage;
 import pom.pages.CategoryPage;
 import pom.pages.HomePage;
-import pom.pages.ProductPage;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -21,7 +20,7 @@ public class CartTests extends BaseTest {
 
         final BigDecimal actualProductPrice = homePage.readWindsurfingProductPrice();
 
-        final CartPage cartPage = homePage.addWindsurfingProductToCart().goToCart();
+        final CartPage cartPage = homePage.addWindsurfingProductToCart().goToCartPage();
 
         final BigDecimal expectedCartTotal = cartPage.readTotalCartAmount();
 
@@ -41,7 +40,7 @@ public class CartTests extends BaseTest {
         final int quantity = 5;
 
         final CartPage cartPage = homePage.addWindsurfingProductToCart()
-                .goToCart()
+                .goToCartPage()
                 .setQuantity(quantity)
                 .updateCart();
 
@@ -65,7 +64,7 @@ public class CartTests extends BaseTest {
 
         final int quantity = 10;
 
-        final CartPage cartPage = homePage.goToCart()
+        final CartPage cartPage = homePage.goToCartPage()
                 .setQuantity(quantity)
                 .updateCart();
 
@@ -89,7 +88,7 @@ public class CartTests extends BaseTest {
         CartPage cartPage = new HomePage(driver)
                 .goToHomePage()
                 .addWindsurfingProductToCart()
-                .goToCart();
+                .goToCartPage();
 
         final BigDecimal cartValue = cartPage.readTotalCartAmount();
         final String invalidCoupon = "invalid";
@@ -135,13 +134,13 @@ public class CartTests extends BaseTest {
         CartPage cartPage = new HomePage(driver)
                 .goToHomePage()
                 .addWindsurfingProductToCart()
-                .goToCart()
+                .goToCartPage()
                 .removeProductFromCart();
 
         Assertions.assertAll(
                 () -> Assertions.assertTrue(cartPage.isCartEmpty()
                         , "Product is still displayed on Cart Page"),
-                () -> Assertions.assertTrue(cartPage.isEmptyCartNotificationDisplayed()
+                () -> Assertions.assertTrue(cartPage.isEmptyCartMessageDisplayed()
                         , "Empty cart notification is not displayed")
         );
     }
