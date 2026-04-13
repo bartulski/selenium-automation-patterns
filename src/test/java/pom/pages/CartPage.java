@@ -1,5 +1,6 @@
 package pom.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import pom.core.BasePage;
@@ -32,30 +33,31 @@ public class CartPage extends BasePage  {
         return driver.findElements(productInCartList).isEmpty();
     }
 
+    @Step("Read total cart amount")
     public BigDecimal readTotalCartAmount() {
         waitForVisibility(totalCartValue);
         return convertStringToBigDecimal(totalCartValue);
     }
-
+    @Step("Set quantity to {quantity}")
     public CartPage setQuantity(int quantity) {
         clearInputField(quantityInputField);
         sendKeys(quantityInputField, String.valueOf(quantity));
         return this;
     }
-
+    @Step("Update cart")
     public CartPage updateCart() {
         clickElement(updateCartButton);
         waitForDisappear(blockUWrapper);
         return this;
     }
-
+    @Step("Apply coupon {couponCode}")
     public CartPage applyCoupon(String couponCode) {
         sendKeys(couponInputField, couponCode);
         clickElement(couponApplyButton);
         waitForDisappear(blockUWrapper);
         return this;
     }
-
+    @Step("Remove product from cart")
     public CartPage removeProductFromCart() {
         clickElement(removeProductButton);
         waitForDisappear(blockUWrapper);

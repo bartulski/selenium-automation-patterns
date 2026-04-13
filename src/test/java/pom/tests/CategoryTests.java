@@ -1,5 +1,7 @@
 package pom.tests;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,6 +13,9 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+@Epic("E-commerce")
+@Feature("Category")
+@DisplayName("Category functionality")
 public class CategoryTests extends BaseTest {
 
     @Test

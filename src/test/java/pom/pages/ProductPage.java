@@ -1,5 +1,6 @@
 package pom.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -26,11 +27,13 @@ public class ProductPage extends BasePage {
         super(driver);
     }
 
+    @Step("Go to product page")
     public ProductPage openProductPage(String productSlug) {
         goToProductPage(productSlug);
         return this;
     }
 
+    @Step("Add product to cart")
     public ProductPage addProductToCart() {
         clickElement(addToCart);
         waitForVisibility(addToCartConfirmationWidget);
@@ -55,6 +58,7 @@ public class ProductPage extends BasePage {
         return convertStringToBigDecimal(cartTotalPriceOnDropdown);
     }
 
+    @Step("Set quantity to {productsAmount}")
     public ProductPage setQuantity(int productsAmount) {
         clearInputField(quantityInputField);
 
@@ -73,6 +77,7 @@ public class ProductPage extends BasePage {
         return this;
     }
 
+    @Step("Set quantity to {productsAmount}")
     public ProductPage setRawQuantity(int productsAmount) {
         clearInputField(quantityInputField);
         sendKeys(quantityInputField, String.valueOf(productsAmount));
@@ -88,12 +93,14 @@ public class ProductPage extends BasePage {
         return isValid;
     }
 
+    @Step("Add product to wishlist")
     public ProductPage addProductToWishlist() {
         clickElement(addToWishlistButton);
         waitForDisappear(blockUIOverlay);
         return this;
     }
 
+    @Step("Go to wishlist page")
     public WishlistPage goToWishlistPage() {
         String originalWindow = driver.getWindowHandle();
         clickElement(wishListButton);

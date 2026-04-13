@@ -1,5 +1,6 @@
 package pom.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,13 +29,13 @@ public class CategoryPage extends BasePage {
         super(driver);
     }
 
-
+    @Step("Go to Wspinaczka category")
     public CategoryPage goToWspinaczkaCategory() {
         driver.get(baseURL + "/product-category" + wspinaczkaSlug);
         storeNotice.dismissStoreNoticeIfPresent();
         return this;
     }
-
+    @Step("Go to Windsurfing category")
     public CategoryPage goToWindsurfingCategory() {
         driver.get(baseURL + "/product-category" + windsurfingSlug);
         storeNotice.dismissStoreNoticeIfPresent();
@@ -72,7 +73,7 @@ public class CategoryPage extends BasePage {
         }
         return this;
     }
-
+    @Step("Go to cart page")
     public CartPage goToCart() {
         clickElement(cartButton);
         return new CartPage(driver);

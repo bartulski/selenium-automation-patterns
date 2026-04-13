@@ -1,5 +1,7 @@
 package pom.tests;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -8,6 +10,9 @@ import pom.pages.HomePage;
 
 import java.math.BigDecimal;
 
+@Epic("E-commerce")
+@Feature("Home Page")
+@DisplayName("Home Page functionality")
 public class HomeTests extends BaseTest {
 
     @Test

@@ -1,5 +1,7 @@
 package pom.tests;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,11 +13,14 @@ import pom.pages.HomePage;
 import java.math.BigDecimal;
 import java.util.List;
 
+@Epic("E-commerce")
+@Feature("Cart")
+@DisplayName("Cart functionality")
 public class CartTests extends BaseTest {
 
 
     @Test
-    @DisplayName( "Should display product in cart with correct total cart price")
+    @DisplayName("Should display product in cart with correct total cart price")
     void shouldDisplayProductInCartWithCorrectTotalCartPrice() {
         final HomePage homePage = new HomePage(driver);
         homePage.goToHomePage();
@@ -103,11 +108,11 @@ public class CartTests extends BaseTest {
 
         Assertions.assertAll(
                 () -> Assertions.assertTrue(cartValue.compareTo(cartPage.readTotalCartAmount()) == 0
-                , "Cart value should not change after applying invalid coupon"),
+                        , "Cart value should not change after applying invalid coupon"),
                 () -> Assertions.assertTrue(couponErrorMessage.contains(invalidCoupon)
-                , "Coupon text not present in error message"),
+                        , "Coupon text not present in error message"),
                 () -> Assertions.assertTrue(couponErrorMessage.contains("nie istnieje")
-                , "Coupon text message is not correct")
+                        , "Coupon text message is not correct")
         );
     }
 
@@ -117,7 +122,9 @@ public class CartTests extends BaseTest {
     void shouldCalculateTotalCartValueForAllProductsInCategory() {
         CategoryPage categoryPage = new CategoryPage(driver);
 
-        List<BigDecimal> listAllPrices = categoryPage.goToWspinaczkaCategory().readAllCategoryPrices();
+        List<BigDecimal> listAllPrices =
+                categoryPage.goToWspinaczkaCategory()
+                        .readAllCategoryPrices();
 
         BigDecimal expectedCartAmount = BigDecimal.ZERO;
 

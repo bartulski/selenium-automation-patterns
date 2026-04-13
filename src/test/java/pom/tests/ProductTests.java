@@ -1,5 +1,7 @@
 package pom.tests;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,6 +12,9 @@ import pom.pages.ProductPage;
 import java.math.BigDecimal;
 
 
+@Epic("E-commerce")
+@Feature("Product page")
+@DisplayName("Product page functionality")
 public class ProductTests extends BaseTest {
     String windsurfingSlug = "/windsurfing-w-lanzarote-costa-teguise/";
 

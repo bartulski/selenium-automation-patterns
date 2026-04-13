@@ -1,5 +1,6 @@
 package pom.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -21,12 +22,14 @@ public class HomePage extends BasePage {
         super(driver);
     }
 
+    @Step("Go to home page")
     public HomePage goToHomePage() {
         driver.get(baseURL);
         storeNotice.dismissStoreNoticeIfPresent();
         return this;
     }
 
+    @Step("Add Windsurfing product to cart")
     public HomePage addWindsurfingProductToCart() {
         clickElement(addWindsurfingButton);
         waitForDisappear(addWindsurfingLoadingIcon);
@@ -54,17 +57,19 @@ public class HomePage extends BasePage {
         return !driver.findElements(productCategories).isEmpty();
     }
 
+    @Step("Go to Windsurfing product page")
     public ProductPage goToWindsurfingProductPage() {
         clickElement(windsurfingProductPageButton);
         return new ProductPage(driver);
     }
 
+    @Step("Go to cart page")
     public CartPage goToCartPage() {
         clickElement(cartButton);
-       // storeNotice.dismissStoreNoticeIfPresent();
         return new CartPage(driver);
     }
 
+    @Step("Search for key word {searchKeyWord}")
     public SearchResultsPage searchFor(String searchKeyWord) {
         sendKeys(searchTextField, searchKeyWord);
         driver.findElement(searchTextField).sendKeys(Keys.ENTER);
