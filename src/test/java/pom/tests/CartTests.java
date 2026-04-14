@@ -19,6 +19,7 @@ import java.util.List;
 public class CartTests extends BaseTest {
 
 
+
     @Test
     @DisplayName("Should display product in cart with correct total cart price")
     void shouldDisplayProductInCartWithCorrectTotalCartPrice() {

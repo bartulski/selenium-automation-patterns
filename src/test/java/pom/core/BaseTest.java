@@ -1,13 +1,17 @@
 package pom.core;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
+import pom.extensions.ScreenshotOnFailureExtension;
 import pom.helpers.BrowserFactory;
 import pom.helpers.ConfigurationReader;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriver;
+
+@ExtendWith(ScreenshotOnFailureExtension.class)
 public class BaseTest {
     protected WebDriver driver;
     protected static ConfigurationReader configuration;
@@ -24,6 +28,10 @@ public class BaseTest {
         if (configuration.getHeadless()) {
             driver.manage().window().setSize(new Dimension(1920, 1080));
         }
+    }
+
+    public WebDriver getDriver() {
+        return driver;
     }
 
     @AfterEach
