@@ -10,7 +10,7 @@ import java.util.List;
 public class StoreNotice {
     protected final WebDriver driver;
     private final By storeNoticeDismissButton = By.cssSelector("p[aria-label='Napis w sklepie'] [role='button']");
-    private final By storeNoticePanel = By.cssSelector(".woocommerce-store-notice");
+    private final By storeNoticePanel = By.cssSelector("p[aria-label='Napis w sklepie']");
     private final WaitUtils waitUtils;
 
     public StoreNotice(WebDriver driver, int waitValueInSeconds) {
@@ -18,7 +18,13 @@ public class StoreNotice {
         this.waitUtils = new WaitUtils(driver, waitValueInSeconds);
     }
 
-    public void dismissStoreNoticeIfPresent() {
+    public void dismissStoreNotice() {
+        waitUtils.waitForVisibility(storeNoticePanel);
+        waitUtils.waitTobeClickable(storeNoticeDismissButton).click();
+        waitUtils.waitToBeInvisible(storeNoticePanel);
+    }
+
+    public void dismissStoreNoticeIfPresentV1() {
         List<WebElement> elements = driver.findElements(storeNoticeDismissButton);
 
         if (elements.isEmpty()) {
@@ -33,3 +39,11 @@ public class StoreNotice {
         }
     }
 }
+
+
+/*
+Nie opierał tej metody na samym findElements() bez waita.
+Dodał krótki wait tylko dla notice, rzędu 2–3 sekund.
+Po kliknięciu koniecznie czekał na zniknięcie panelu.
+Opcjonalnie dodał fallback dla click intercept na tym jednym elemencie.
+ */

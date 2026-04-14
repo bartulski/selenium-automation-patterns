@@ -25,7 +25,7 @@ public class HomePage extends BasePage {
     @Step("Go to home page")
     public HomePage goToHomePage() {
         driver.get(baseURL);
-        storeNotice.dismissStoreNoticeIfPresent();
+        storeNotice.dismissStoreNotice();
         return this;
     }
 

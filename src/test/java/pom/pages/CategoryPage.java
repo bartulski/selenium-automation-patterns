@@ -32,13 +32,13 @@ public class CategoryPage extends BasePage {
     @Step("Go to Wspinaczka category")
     public CategoryPage goToWspinaczkaCategory() {
         driver.get(baseURL + "/product-category" + wspinaczkaSlug);
-        storeNotice.dismissStoreNoticeIfPresent();
+        storeNotice.dismissStoreNotice();
         return this;
     }
     @Step("Go to Windsurfing category")
     public CategoryPage goToWindsurfingCategory() {
         driver.get(baseURL + "/product-category" + windsurfingSlug);
-        storeNotice.dismissStoreNoticeIfPresent();
+        storeNotice.dismissStoreNotice();
         return this;
     }
 
