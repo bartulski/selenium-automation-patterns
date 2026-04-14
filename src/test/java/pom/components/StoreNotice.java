@@ -23,19 +23,4 @@ public class StoreNotice {
         waitUtils.waitTobeClickable(storeNoticeDismissButton).click();
         waitUtils.waitToBeInvisible(storeNoticePanel);
     }
-
-    public void dismissStoreNoticeIfPresentV1() {
-        List<WebElement> elements = driver.findElements(storeNoticeDismissButton);
-
-        if (elements.isEmpty()) {
-            return;
-        }
-
-        WebElement dismissButton = elements.get(0);
-
-        if (dismissButton.isDisplayed()) {
-            dismissButton.click();
-            waitUtils.waitToBeInvisible(storeNoticePanel);
-        }
-    }
 }

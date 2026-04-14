@@ -46,20 +46,21 @@ public class ProductTests extends BaseTest {
 
     @Test
     @DisplayName("Should recalculate total price when changing quantity")
-    void shouldRecalculateTotalPriceWhenChangingQuantity() {
+    void shouldRecalculateTotalPriceWhenChangingQuantity() throws InterruptedException {
         ProductPage productPage = new ProductPage(driver)
                 .openProductPage(windsurfingSlug);
 
-        BigDecimal actualProductPrice = productPage.readProductPrice();
+        BigDecimal productPrice = productPage.readProductPrice();
 
         final int quantity = 10;
         productPage.setQuantity(quantity).addProductToCart();
 
-        BigDecimal expectedTotalPrice = actualProductPrice.multiply(BigDecimal.valueOf(quantity));
+        BigDecimal expectedTotalPrice = productPrice.multiply(BigDecimal.valueOf(quantity));
+        BigDecimal actualTotalPrice = productPage.readTotalCartAmount();
 
         Assertions.assertEquals(
                 0, expectedTotalPrice.compareTo(
-                        productPage.readTotalCartAmount()),
+                        actualTotalPrice),
                 "Calculated amount of total cart price is not correct"
         );
     }

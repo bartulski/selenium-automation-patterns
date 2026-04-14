@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import pom.components.StoreNotice;
+import pom.components.StripeWidget;
 import pom.helpers.ConfigurationReader;
 import pom.helpers.WaitUtils;
 import pom.helpers.WindowHelper;
@@ -18,6 +19,7 @@ public abstract class BasePage {
     protected StoreNotice storeNotice;
     protected WindowHelper windowHelper;
     protected WaitUtils waitUtils;
+    protected StripeWidget stripeWidget;
 
 
     protected BasePage(WebDriver driver) {
@@ -27,10 +29,12 @@ public abstract class BasePage {
         this.storeNotice = new StoreNotice(driver, waitValueInSeconds);
         this.windowHelper = new WindowHelper(driver, waitValueInSeconds);
         this.waitUtils = new WaitUtils(driver, waitValueInSeconds);
+        this.stripeWidget = new StripeWidget(driver, waitValueInSeconds);
     }
 
     protected void goToProductPage(String productSlug) {
         driver.get(baseURL + "/products" + productSlug);
+        stripeWidget.closeStripeWidget();
         storeNotice.dismissStoreNotice();
     }
 
