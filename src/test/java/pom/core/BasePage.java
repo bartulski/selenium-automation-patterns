@@ -34,7 +34,7 @@ public abstract class BasePage {
 
     protected void goToProductPage(String productSlug) {
         driver.get(baseURL + "/products" + productSlug);
-        stripeWidget.closeStripeWidget();
+        stripeWidget.handleStripeWidgetOverlay();
         storeNotice.dismissStoreNotice();
     }
 

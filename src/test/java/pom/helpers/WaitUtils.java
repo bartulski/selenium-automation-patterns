@@ -29,6 +29,11 @@ public class WaitUtils {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
+    public void waitToAppear(By locator) {
+        wait.until(ExpectedConditions.numberOfElementsToBe(locator, 1));
+    }
+
+
     public void waitToDisappear(By locator) {
         wait.until(ExpectedConditions.numberOfElementsToBe(locator, 0));
     }
