@@ -61,8 +61,8 @@ Implemented test scenarios include:
 ### Clone repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
-cd YOUR_REPO
+git clone https://github.com/bl0mkvist/selenium-automation-patterns.git
+cd selenium-automation-patterns
 ```
 
 ### Run all tests
@@ -151,4 +151,4 @@ The goal of this project is to present a realistic, production-like automation f
 
 ## Author
 
-GitHub: [https://github.com/YOUR_USERNAME](https://github.com/YOUR_USERNAME)
+GitHub: [https://github.com/bl0mkvist](https://github.com/bl0mkvist)
