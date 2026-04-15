@@ -24,14 +24,14 @@ public class CartTests extends BaseTest {
     @Test
     @DisplayName("Should display product in cart with correct total cart price")
     void shouldDisplayProductInCartWithCorrectTotalCartPrice() {
-        final HomePage homePage = new HomePage(driver);
+        HomePage homePage = new HomePage(driver);
         homePage.goToHomePage();
 
-        final BigDecimal actualProductPrice = homePage.readWindsurfingProductPrice();
+        BigDecimal actualProductPrice = homePage.readWindsurfingProductPrice();
 
-        final CartPage cartPage = homePage.addWindsurfingProductToCart().goToCartPage();
+        CartPage cartPage = homePage.addWindsurfingProductToCart().goToCartPage();
 
-        final BigDecimal expectedCartTotal = cartPage.readTotalCartAmount();
+        BigDecimal expectedCartTotal = cartPage.readTotalCartAmount();
 
         Assertions.assertEquals(expectedCartTotal
                 , actualProductPrice
@@ -43,24 +43,19 @@ public class CartTests extends BaseTest {
     @Test
     @DisplayName("Should recalculate cart value after changing quantity")
     void shouldRecalculateCartValueAfterChangingQuantity() {
-        final HomePage homePage = new HomePage(driver);
-        final BigDecimal actualProductPrice = homePage.goToHomePage()
+        HomePage homePage = new HomePage(driver);
+        BigDecimal actualProductPrice = homePage.goToHomePage()
                 .readWindsurfingProductPrice();
 
-        final int quantity = 5;
+        int quantity = 5;
 
-        final CartPage cartPage = homePage.addWindsurfingProductToCart()
+        CartPage cartPage = homePage.addWindsurfingProductToCart()
                 .goToCartPage()
                 .setQuantity(quantity)
                 .updateCart();
 
-        final BigDecimal expectedCalculatedCartTotalValue = actualProductPrice.multiply(BigDecimal.valueOf(quantity));
-        final BigDecimal actualCartTotalValue = cartPage.readTotalCartAmount();
-
-        Assertions.assertEquals(expectedCalculatedCartTotalValue,
-                actualCartTotalValue,
-                "Expected calculated amount : " + expectedCalculatedCartTotalValue
-                        + " does not match with actual cart total value : " + actualCartTotalValue);
+        BigDecimal expectedCalculatedCartTotalValue = actualProductPrice.multiply(BigDecimal.valueOf(quantity));
+        BigDecimal actualCartTotalValue = cartPage.readTotalCartAmount();
 
         Assertions.assertEquals(0, expectedCalculatedCartTotalValue.compareTo(actualCartTotalValue),
                 "Expected calculated amount : " + expectedCalculatedCartTotalValue
@@ -73,19 +68,19 @@ public class CartTests extends BaseTest {
         HomePage homePage = new HomePage(driver);
         homePage.goToHomePage().addWindsurfingProductToCart();
 
-        final int quantity = 10;
+        int quantity = 10;
 
-        final CartPage cartPage = homePage.goToCartPage()
+        CartPage cartPage = homePage.goToCartPage()
                 .setQuantity(quantity)
                 .updateCart();
 
-        final BigDecimal cartTotalValueBeforeDiscount = cartPage.readTotalCartAmount();
+        BigDecimal cartTotalValueBeforeDiscount = cartPage.readTotalCartAmount();
 
-        final String couponTenPercentDiscount = "10procent";
+        String couponTenPercentDiscount = "10procent";
         cartPage.applyCoupon(couponTenPercentDiscount);
 
-        final BigDecimal actualCartValueWithDiscount = cartPage.readTotalCartAmount();
-        final BigDecimal expectedCartValueWithDiscount =
+        BigDecimal actualCartValueWithDiscount = cartPage.readTotalCartAmount();
+        BigDecimal expectedCartValueWithDiscount =
                 cartTotalValueBeforeDiscount
                         .multiply(new BigDecimal("0.90"));
 
@@ -102,8 +97,8 @@ public class CartTests extends BaseTest {
                 .addWindsurfingProductToCart()
                 .goToCartPage();
 
-        final BigDecimal cartValue = cartPage.readTotalCartAmount();
-        final String invalidCoupon = "invalid";
+        BigDecimal cartValue = cartPage.readTotalCartAmount();
+        String invalidCoupon = "invalid";
 
         cartPage.applyCoupon(invalidCoupon);
         String couponErrorMessage = cartPage.readCouponErrorMessage();

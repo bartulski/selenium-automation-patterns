@@ -25,8 +25,8 @@ public class WishlistTests extends BaseTest {
                 .addProductToWishlist()
                 .goToWishlistPage();
 
-        final int actualNumberOfProducts = wishlistPage.getNumberOfProducts();
-        final int expectedNumberOfProducts = 1;
+        int actualNumberOfProducts = wishlistPage.getNumberOfProducts();
+        int expectedNumberOfProducts = 1;
         Assertions.assertEquals(
                 expectedNumberOfProducts
                 , actualNumberOfProducts

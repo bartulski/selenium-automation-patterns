@@ -54,7 +54,7 @@ public class ProductTests extends BaseTest {
 
         BigDecimal productPrice = productPage.readProductPrice();
 
-        final int quantity = 10;
+        int quantity = 10;
         productPage.setQuantity(quantity).addProductToCart();
 
         BigDecimal expectedTotalPrice = productPrice.multiply(BigDecimal.valueOf(quantity));

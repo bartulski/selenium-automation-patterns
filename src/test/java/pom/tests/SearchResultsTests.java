@@ -19,7 +19,7 @@ public class SearchResultsTests extends BaseTest {
     @Test
     @DisplayName("Should return matching products for search query")
     void shouldReturnMatchingProductsForSearchQuery() {
-        final String searchKeyWord = "yoga";
+        String searchKeyWord = "yoga";
 
         SearchResultsPage searchResultsPage = new HomePage(driver)
                 .goToHomePage()
