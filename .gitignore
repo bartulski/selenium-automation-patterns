@@ -1,5 +1,6 @@
 # Java / Maven
 target/
+
 *.class
 *.log
 hs_err_pid*
@@ -21,6 +22,7 @@ allure-report/
 *.rar
 
 # IntelliJ IDEA
+.idea
 .idea/
 *.iws
 *.iml
