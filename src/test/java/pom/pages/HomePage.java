@@ -1,10 +1,12 @@
 package pom.pages;
 
+import pom.core.BasePage;
+
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import pom.core.BasePage;
+
 
 import java.math.BigDecimal;
 

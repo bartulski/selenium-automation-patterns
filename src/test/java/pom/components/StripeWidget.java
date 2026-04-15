@@ -1,8 +1,8 @@
 package pom.components;
 
+import pom.helpers.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import pom.helpers.WaitUtils;
 import org.openqa.selenium.WebDriver;
 
 

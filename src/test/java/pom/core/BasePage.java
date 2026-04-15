@@ -1,14 +1,15 @@
 package pom.core;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import pom.components.StoreNotice;
 import pom.components.StripeWidget;
 import pom.helpers.ConfigurationReader;
 import pom.helpers.WaitUtils;
 import pom.helpers.WindowHelper;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import java.math.BigDecimal;
 
 

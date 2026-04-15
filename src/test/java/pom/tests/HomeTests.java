@@ -1,12 +1,13 @@
 package pom.tests;
 
+import pom.core.BaseTest;
+import pom.pages.HomePage;
+
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import pom.core.BaseTest;
-import pom.pages.HomePage;
 
 import java.math.BigDecimal;
 

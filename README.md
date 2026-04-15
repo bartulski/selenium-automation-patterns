@@ -1,6 +1,8 @@
+![CI](https://github.com/bl0mkvist/selenium-automation-patterns/actions/workflows/ci.yml/badge.svg)
+
 # Selenium Automation Framework (Java)
 
-Automated UI tests for an e-commerce application built with **Java + Selenium** using the **Page Object Model (POM)** pattern.
+Automated UI tests for an e-commerce application built with **Java and Selenium**, using the **Page Object Model (POM)** pattern.
 
 ---
 
@@ -34,25 +36,25 @@ Implemented test scenarios include:
 
 * Cart functionality
 
-    * Add/remove products
-    * Update quantity
-    * Price recalculation
+  * Add/remove products
+  * Update quantity
+  * Price recalculation
 
 * Wishlist
 
-    * Add product to wishlist
-    * Verify product presence
-    * Window handling (switching between tabs/windows)
+  * Add product to wishlist
+  * Verify product presence
+  * Window handling (switching between tabs/windows)
 
 * Search
 
-    * Search for products
-    * Validate results
+  * Search for products
+  * Validate results
 
 * Validation scenarios
 
-    * Invalid quantity handling
-    * Coupon validation
+  * Invalid quantity handling
+  * Coupon validation
 
 ---
 
@@ -65,13 +67,7 @@ git clone https://github.com/bl0mkvist/selenium-automation-patterns.git
 cd selenium-automation-patterns
 ```
 
-### Run all tests
-
-```bash
-mvn clean test
-```
-
-### Run with Allure report
+### Run tests and generate Allure report
 
 ```bash
 mvn clean test
@@ -96,9 +92,9 @@ Includes:
 
 Tests are automatically executed on every push using GitHub Actions.
 
-* Runs on Linux environment
-* Builds project with Maven
-* Executes full test suite
+* Runs on a Linux environment
+* Builds the project with Maven
+* Executes the full test suite
 
 ---
 
@@ -151,4 +147,4 @@ The goal of this project is to present a realistic, production-like automation f
 
 ## Author
 
-GitHub: [https://github.com/bl0mkvist](https://github.com/bl0mkvist)
+GitHub: https://github.com/bl0mkvist
