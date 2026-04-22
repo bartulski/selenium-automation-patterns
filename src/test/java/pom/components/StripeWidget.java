@@ -29,11 +29,10 @@ public class StripeWidget {
     // Handles Stripe dev tools overlay (iframe + animations) that blocks UI interactions in tests
     public void handleStripeWidgetOverlayIfAppear() {
         try {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5)); // nowe
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5)); // Shorter wait implemented to reduce pipeline time in case of absence of Stripe widget
 
             WebElement mainIframe = wait.until(ExpectedConditions.visibilityOfElementLocated(stripeDevToolsMainIframe));
 
-           // WebElement mainIframe = waitUtils.waitForVisibility(stripeDevToolsMainIframe); // stare
             driver.switchTo().frame(mainIframe);
             waitUtils.waitToDisappear(stripeAnimationLoader);
 
