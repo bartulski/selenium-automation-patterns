@@ -22,11 +22,13 @@ public abstract class BasePage {
     protected WindowHelper windowHelper;
     protected WaitUtils waitUtils;
     protected StripeWidget stripeWidget;
+    protected ConfigurationReader configurationReader;
 
     protected BasePage(WebDriver driver) {
         this.driver = driver;
-        this.baseURL = new ConfigurationReader().getBaseURL();
-        this.waitValueInSeconds = new ConfigurationReader().getWait();
+        this.configurationReader = BaseTest.configuration;
+        this.baseURL = configurationReader.getBaseURL();
+        this.waitValueInSeconds = configurationReader.getWait();
         this.storeNotice = new StoreNotice(driver, waitValueInSeconds);
         this.windowHelper = new WindowHelper(driver, waitValueInSeconds);
         this.waitUtils = new WaitUtils(driver, waitValueInSeconds);

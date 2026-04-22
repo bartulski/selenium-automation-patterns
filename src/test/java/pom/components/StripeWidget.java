@@ -1,10 +1,14 @@
 package pom.components;
 
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pom.helpers.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WebDriver;
+
+import java.time.Duration;
 
 
 public class StripeWidget {
@@ -25,7 +29,11 @@ public class StripeWidget {
     // Handles Stripe dev tools overlay (iframe + animations) that blocks UI interactions in tests
     public void handleStripeWidgetOverlayIfAppear() {
         try {
-            WebElement mainIframe = waitUtils.waitForVisibility(stripeDevToolsMainIframe);
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5)); // nowe
+
+            WebElement mainIframe = wait.until(ExpectedConditions.visibilityOfElementLocated(stripeDevToolsMainIframe));
+
+           // WebElement mainIframe = waitUtils.waitForVisibility(stripeDevToolsMainIframe); // stare
             driver.switchTo().frame(mainIframe);
             waitUtils.waitToDisappear(stripeAnimationLoader);
 
