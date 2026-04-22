@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 @Feature("Wishlist page")
 @DisplayName("Wishlist functionality")
 public class WishlistTests extends BaseTest {
-    String granKoscielcowProduct = "/gran-koscielcow/"; //to move ProductsSlugs
+    String granKoscielcowProduct = "/gran-koscielcow/";
 
     @Test
     @DisplayName("Should display product in wishlist")
@@ -27,6 +27,7 @@ public class WishlistTests extends BaseTest {
 
         int actualNumberOfProducts = wishlistPage.getNumberOfProducts();
         int expectedNumberOfProducts = 1;
+
         Assertions.assertEquals(
                 expectedNumberOfProducts
                 , actualNumberOfProducts

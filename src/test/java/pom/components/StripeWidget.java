@@ -1,5 +1,6 @@
 package pom.components;
 
+import org.openqa.selenium.TimeoutException;
 import pom.helpers.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -13,7 +14,6 @@ public class StripeWidget {
     private final By stripeDevToolsButton = By.cssSelector("button[aria-label='Otwórz narzędzia dewelopera Stripe']");
     private final By stripeDevToolsSettingsButton = By.cssSelector("button[aria-controls='tabpanel-settings']");
     private final By stripeDevToolsTopLeftCornerButton = By.cssSelector("#tabpanel-settings [role='radiogroup']>:nth-child(1)");
-    private final By stripeDevToolsHideButton = By.cssSelector("button[aria-label='Zamknij narzędzia dewelopera Stripe']");
     private final By stripeAnimationLoader = By.cssSelector(".is-entering");
     private final By stripeTopLeftPositionLocator = By.cssSelector("[class*='--topLeft']");
     private final By stripeBottomRightPositionLocator = By.cssSelector("[class*='bottomRight']");
@@ -23,9 +23,9 @@ public class StripeWidget {
         this.waitUtils = new WaitUtils(driver, waitInSeconds);
     }
     // Handles Stripe dev tools overlay (iframe + animations) that blocks UI interactions in tests
-    public void handleStripeWidgetOverlay() {
-        WebElement mainIframe = waitUtils.waitForVisibility(stripeDevToolsMainIframe);
+    public void handleStripeWidgetOverlayIfAppear() {
         try {
+            WebElement mainIframe = waitUtils.waitForVisibility(stripeDevToolsMainIframe);
             driver.switchTo().frame(mainIframe);
             waitUtils.waitToDisappear(stripeAnimationLoader);
 
@@ -42,9 +42,10 @@ public class StripeWidget {
             waitUtils.waitToAppear(stripeTopLeftPositionLocator);
 
             waitUtils.waitToDisappear(stripeAnimationLoader);
+        } catch (TimeoutException e) {
+            return;
         } finally {
             driver.switchTo().defaultContent();
         }
     }
-
 }

@@ -17,10 +17,10 @@ import java.math.BigDecimal;
 public class HomeTests extends BaseTest {
 
     @Test
-    @DisplayName("Should show home page content")
+    @DisplayName("Should show home page content - title, correct URL address, display product categories")
     void shouldShowHomePageContent() {
-        HomePage homePage = new HomePage(driver);
-        homePage.goToHomePage();
+        HomePage homePage = new HomePage(driver)
+                .goToHomePage();
 
         String expectedPageTitle = "FakeStore – Sklep do nauki testowania";
         String expectedPageURL = configuration.getBaseURL().replaceAll("/+$", "");
@@ -46,15 +46,15 @@ public class HomeTests extends BaseTest {
     @Test
     @DisplayName("Should update cart total amount after adding one product")
     void shouldUpdateCartTotalAfterAddingOneProduct() {
-        HomePage homePage = new HomePage(driver);
-
-        homePage.goToHomePage().addWindsurfingProductToCart();
+        HomePage homePage = new HomePage(driver)
+                .goToHomePage()
+                .addWindsurfingProductToCart();
 
         BigDecimal expectedCartValue = homePage.readWindsurfingProductPrice();
 
         Assertions.assertEquals(
-                0, expectedCartValue
-                        .compareTo(homePage.readTotalCartAmount()),
+                0,
+                expectedCartValue.compareTo(homePage.readTotalCartAmount()),
                 "Total cart value is not correct"
         );
     }

@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+
 import java.math.BigDecimal;
 
 
@@ -22,7 +23,6 @@ public abstract class BasePage {
     protected WaitUtils waitUtils;
     protected StripeWidget stripeWidget;
 
-
     protected BasePage(WebDriver driver) {
         this.driver = driver;
         this.baseURL = new ConfigurationReader().getBaseURL();
@@ -31,12 +31,6 @@ public abstract class BasePage {
         this.windowHelper = new WindowHelper(driver, waitValueInSeconds);
         this.waitUtils = new WaitUtils(driver, waitValueInSeconds);
         this.stripeWidget = new StripeWidget(driver, waitValueInSeconds);
-    }
-
-    protected void goToProductPage(String productSlug) {
-        driver.get(baseURL + "/products" + productSlug);
-        stripeWidget.handleStripeWidgetOverlay();
-        storeNotice.dismissStoreNotice();
     }
 
     protected void clickElement(By locator) {
@@ -49,8 +43,29 @@ public abstract class BasePage {
         new Actions(driver).moveToElement(elementToHover).perform();
     }
 
+    protected void sendKeys(By locator, String value) {
+        WebElement element = waitUtils.waitForVisibility(locator);
+        element.sendKeys(value);
+    }
+
     protected String readText(By locator) {
         return waitUtils.waitForVisibility(locator).getText();
+    }
+
+    protected void clearInputField(By locator) {
+        WebElement element = waitUtils.waitForVisibility(locator);
+        element.clear();
+    }
+
+    protected int getListSize(By locator) {
+        waitForVisibility(locator);
+        return driver.findElements(locator).size();
+    }
+
+    protected void goToProductPage(String productSlug) {
+        driver.get(baseURL + "/products" + productSlug);
+        stripeWidget.handleStripeWidgetOverlayIfAppear();
+        storeNotice.dismissStoreNotice();
     }
 
     protected BigDecimal convertStringToBigDecimal(By locator) {
@@ -59,22 +74,7 @@ public abstract class BasePage {
         return new BigDecimal(readString.replace(",", "."));
     }
 
-    protected void clearInputField(By locator) {
-        WebElement element = waitUtils.waitForVisibility(locator);
-        element.clear();
-    }
-
-    protected void sendKeys(By locator, String value) {
-        WebElement element = waitUtils.waitForVisibility(locator);
-        element.sendKeys(value);
-    }
-
-    protected int getListSize(By locator) {
-        waitForVisibility(locator);
-        return driver.findElements(locator).size();
-    }
-
-    //domen waits
+    //Domain waits:
     protected void waitForDisappear(By locator) {
         waitUtils.waitToDisappear(locator);
     }
@@ -88,6 +88,6 @@ public abstract class BasePage {
     }
 
     protected WebElement waitToBeClickable(By locator) {
-       return waitUtils.waitTobeClickable(locator);
+        return waitUtils.waitTobeClickable(locator);
     }
 }

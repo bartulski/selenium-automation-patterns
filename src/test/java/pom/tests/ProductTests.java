@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-
 import java.math.BigDecimal;
 
 
@@ -23,39 +22,44 @@ public class ProductTests extends BaseTest {
     @Test
     @DisplayName("Should update cart prices after adding product")
     void shouldUpdateCartPricesAfterAddingProduct() {
-        HomePage homePage = new HomePage(driver);
-
-        ProductPage productPage =
-                homePage.goToHomePage()
-                        .goToWindsurfingProductPage()
-                        .addProductToCart();
+        ProductPage productPage = new HomePage(driver)
+                .goToHomePage()
+                .goToWindsurfingProductPage()
+                .addProductToCart();
 
         BigDecimal expectedProductPrice = productPage.readProductPrice();
+        BigDecimal actualCartTotal = productPage.readTotalCartAmount();
+        BigDecimal actualCartTotalOnDropdown = productPage.readTotalCartAmountOnDropdown();
 
         Assertions.assertAll(
                 () -> Assertions.assertEquals(
-                        0, expectedProductPrice
-                                .compareTo(productPage.readTotalCartAmount())
-                        , "Value of the product in Cart is not correct"
+                        0,
+                        expectedProductPrice.compareTo(actualCartTotal)
+                        , "Cart total: " + actualCartTotal +
+                                " does not match expected product price: " + expectedProductPrice
                 ),
                 () -> Assertions.assertEquals(
                         0, expectedProductPrice
-                                .compareTo(productPage.readTotalCartAmountOnDropdown()),
-                        "Value of the product on Cart dropdown is not correct"
+                                .compareTo(actualCartTotalOnDropdown),
+                        "Dropdown total: " + actualCartTotalOnDropdown +
+                                " does not match expected product price: " + expectedProductPrice
                 )
         );
     }
 
     @Test
     @DisplayName("Should recalculate total price when changing quantity")
-    void shouldRecalculateTotalPriceWhenChangingQuantity() throws InterruptedException {
+    void shouldRecalculateTotalPriceWhenChangingQuantity() {
         ProductPage productPage = new ProductPage(driver)
                 .openProductPage(windsurfingSlug);
 
-        BigDecimal productPrice = productPage.readProductPrice();
+        BigDecimal productPrice = productPage
+                .readProductPrice();
 
         int quantity = 10;
-        productPage.setQuantity(quantity).addProductToCart();
+        productPage
+                .setQuantity(quantity)
+                .addProductToCart();
 
         BigDecimal expectedTotalPrice = productPrice.multiply(BigDecimal.valueOf(quantity));
         BigDecimal actualTotalPrice = productPage.readTotalCartAmount();

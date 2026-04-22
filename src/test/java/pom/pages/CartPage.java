@@ -17,21 +17,13 @@ public class CartPage extends BasePage  {
     By couponInputField = By.cssSelector("#coupon_code");
     By couponApplyButton = By.cssSelector("[name='apply_coupon']");
     By removeProductButton = By.cssSelector(".product-remove a[role='button']");
-    By productInCartList = By.cssSelector(".cart_item");
+    By productsInCartList = By.cssSelector(".cart_item");
     By emptyCartNotification = By.cssSelector(".woocommerce-notices-wrapper .cart-empty");
     By couponErrorText = By.cssSelector(".coupon-error-notice");
 
 
     public CartPage(WebDriver driver) {
         super(driver);
-    }
-
-    public boolean isEmptyCartMessageDisplayed() {
-        return waitForVisibility(emptyCartNotification).isDisplayed();
-    }
-
-    public boolean isCartEmpty() {
-        return driver.findElements(productInCartList).isEmpty();
     }
 
     @Step("Read total cart amount")
@@ -67,5 +59,13 @@ public class CartPage extends BasePage  {
 
     public String readCouponErrorMessage() {
         return waitForVisibility(couponErrorText).getText();
+    }
+
+    public boolean isEmptyCartMessageDisplayed() {
+        return waitForVisibility(emptyCartNotification).isDisplayed();
+    }
+
+    public boolean isCartEmpty() {
+        return driver.findElements(productsInCartList).isEmpty();
     }
 }

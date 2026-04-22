@@ -22,7 +22,6 @@ public class CategoryTests extends BaseTest {
     @Test
     @DisplayName("Should sort products by price descending")
     void shouldSortProductsByPriceDescending() {
-
         CategoryPage categoryPage = new CategoryPage(driver)
                 .goToWindsurfingCategory()
                 .sortProductsByPriceDescending();
@@ -32,7 +31,8 @@ public class CategoryTests extends BaseTest {
 
         expectedPriceList.sort(Comparator.reverseOrder());
 
-        Assertions.assertEquals(expectedPriceList
+        Assertions.assertEquals(
+                expectedPriceList
                 , actualPriceList
                 , "Prices are not sorted in descending order"
         );

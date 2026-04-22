@@ -19,37 +19,39 @@ import java.util.List;
 @DisplayName("Cart functionality")
 public class CartTests extends BaseTest {
 
-
-
     @Test
     @DisplayName("Should display product in cart with correct total cart price")
     void shouldDisplayProductInCartWithCorrectTotalCartPrice() {
-        HomePage homePage = new HomePage(driver);
-        homePage.goToHomePage();
+        HomePage homePage = new HomePage(driver)
+                .goToHomePage();
 
-        BigDecimal actualProductPrice = homePage.readWindsurfingProductPrice();
+        BigDecimal expectedCartTotal = homePage.readWindsurfingProductPrice();
 
-        CartPage cartPage = homePage.addWindsurfingProductToCart().goToCartPage();
+        CartPage cartPage = homePage
+                .addWindsurfingProductToCart()
+                .goToCartPage();
 
-        BigDecimal expectedCartTotal = cartPage.readTotalCartAmount();
+        BigDecimal actualCartTotal = cartPage.readTotalCartAmount();
 
-        Assertions.assertEquals(expectedCartTotal
-                , actualProductPrice
+        Assertions.assertEquals(
+                0,
+                expectedCartTotal.compareTo(actualCartTotal)
                 , "Total cart amount : " + expectedCartTotal
-                        + " does not match actual product price : " + actualProductPrice
+                        + " does not match actual product price : " + actualCartTotal
         );
     }
 
     @Test
     @DisplayName("Should recalculate cart value after changing quantity")
     void shouldRecalculateCartValueAfterChangingQuantity() {
-        HomePage homePage = new HomePage(driver);
-        BigDecimal actualProductPrice = homePage.goToHomePage()
-                .readWindsurfingProductPrice();
+        HomePage homePage = new HomePage(driver).goToHomePage();
+
+        BigDecimal actualProductPrice = homePage.readWindsurfingProductPrice();
 
         int quantity = 5;
 
-        CartPage cartPage = homePage.addWindsurfingProductToCart()
+        CartPage cartPage = homePage
+                .addWindsurfingProductToCart()
                 .goToCartPage()
                 .setQuantity(quantity)
                 .updateCart();
@@ -57,20 +59,23 @@ public class CartTests extends BaseTest {
         BigDecimal expectedCalculatedCartTotalValue = actualProductPrice.multiply(BigDecimal.valueOf(quantity));
         BigDecimal actualCartTotalValue = cartPage.readTotalCartAmount();
 
-        Assertions.assertEquals(0, expectedCalculatedCartTotalValue.compareTo(actualCartTotalValue),
+        Assertions.assertEquals(
+                0,
+                expectedCalculatedCartTotalValue.compareTo(actualCartTotalValue),
                 "Expected calculated amount : " + expectedCalculatedCartTotalValue
-                        + " does not match with actual cart total value : " + actualCartTotalValue);
+                        + " does not match with actual cart total value : " + actualCartTotalValue
+        );
     }
 
     @Test
     @DisplayName("Should recalculate cart value after applying coupon")
     void shouldRecalculateCartValueAfterApplyingCoupon() {
-        HomePage homePage = new HomePage(driver);
-        homePage.goToHomePage().addWindsurfingProductToCart();
-
         int quantity = 10;
 
-        CartPage cartPage = homePage.goToCartPage()
+        CartPage cartPage = new HomePage(driver)
+                .goToHomePage()
+                .addWindsurfingProductToCart()
+                .goToCartPage()
                 .setQuantity(quantity)
                 .updateCart();
 
@@ -84,9 +89,12 @@ public class CartTests extends BaseTest {
                 cartTotalValueBeforeDiscount
                         .multiply(new BigDecimal("0.90"));
 
-        Assertions.assertEquals(0, expectedCartValueWithDiscount.compareTo(actualCartValueWithDiscount)
+        Assertions.assertEquals(
+                0,
+                expectedCartValueWithDiscount.compareTo(actualCartValueWithDiscount)
                 , "Expected calculated amount : " + expectedCartValueWithDiscount
-                        + " does not match actual cart total value : " + actualCartValueWithDiscount);
+                        + " does not match actual cart total value : " + actualCartValueWithDiscount
+        );
     }
 
     @Test
@@ -104,15 +112,18 @@ public class CartTests extends BaseTest {
         String couponErrorMessage = cartPage.readCouponErrorMessage();
 
         Assertions.assertAll(
-                () -> Assertions.assertTrue(cartValue.compareTo(cartPage.readTotalCartAmount()) == 0
+                () -> Assertions.assertEquals(
+                        0,
+                        cartValue.compareTo(cartPage.readTotalCartAmount())
                         , "Cart value should not change after applying invalid coupon"),
-                () -> Assertions.assertTrue(couponErrorMessage.contains(invalidCoupon)
+                () -> Assertions.assertTrue(
+                        couponErrorMessage.contains(invalidCoupon)
                         , "Coupon text not present in error message"),
-                () -> Assertions.assertTrue(couponErrorMessage.contains("nie istnieje")
+                () -> Assertions.assertTrue(
+                        couponErrorMessage.contains("nie istnieje")
                         , "Coupon text message is not correct")
         );
     }
-
 
     @Test
     @DisplayName("Should calculate total cart value for all products in category")
@@ -120,7 +131,8 @@ public class CartTests extends BaseTest {
         CategoryPage categoryPage = new CategoryPage(driver);
 
         List<BigDecimal> listAllPrices =
-                categoryPage.goToWspinaczkaCategory()
+                categoryPage
+                        .goToWspinaczkaCategory()
                         .readAllCategoryPrices();
 
         BigDecimal expectedCartAmount = BigDecimal.ZERO;
@@ -129,11 +141,15 @@ public class CartTests extends BaseTest {
             expectedCartAmount = expectedCartAmount.add(price);
         }
 
-        CartPage cartPage = categoryPage.addAllCategoryProductsToCart().goToCart();
+        CartPage cartPage = categoryPage
+                .addAllCategoryProductsToCart()
+                .goToCart();
 
         BigDecimal actualCartAmount = cartPage.readTotalCartAmount();
 
-        Assertions.assertEquals(0, expectedCartAmount.compareTo(actualCartAmount)
+        Assertions.assertEquals(
+                0,
+                expectedCartAmount.compareTo(actualCartAmount)
                 , "Expected total cart value : " + expectedCartAmount
                         + " does not match with cart total value : " + actualCartAmount
         );
@@ -149,11 +165,12 @@ public class CartTests extends BaseTest {
                 .removeProductFromCart();
 
         Assertions.assertAll(
-                () -> Assertions.assertTrue(cartPage.isCartEmpty()
+                () -> Assertions.assertTrue(
+                        cartPage.isCartEmpty()
                         , "Product is still displayed on Cart Page"),
-                () -> Assertions.assertTrue(cartPage.isEmptyCartMessageDisplayed()
+                () -> Assertions.assertTrue(
+                        cartPage.isEmptyCartMessageDisplayed()
                         , "Empty cart notification is not displayed")
         );
     }
-
 }
