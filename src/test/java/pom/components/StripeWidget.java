@@ -31,9 +31,8 @@ public class StripeWidget {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5)); // Shorter wait implemented to reduce pipeline time in case of absence of Stripe widget
 
-            WebElement mainIframe = wait.until(ExpectedConditions.visibilityOfElementLocated(stripeDevToolsMainIframe));
-
-            driver.switchTo().frame(mainIframe);
+            wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(stripeDevToolsMainIframe));
+            
             waitUtils.waitToDisappear(stripeAnimationLoader);
 
             waitUtils.waitTobeClickable(stripeDevToolsButton).click();
