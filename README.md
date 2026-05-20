@@ -122,6 +122,11 @@ Solution:
 * Waiting for UI state instead of only element visibility
 * Dedicated component for iframe handling
 
+### Test data centralization
+
+Shared test literals (e.g. product slugs, coupon codes, expected UI text) are extracted into the `testdata` package to reduce duplication.
+Scenario-specific values remain local in tests for readability.
+
 ---
 
 ## Project Structure
@@ -131,6 +136,7 @@ Solution:
 * **extensions/** — custom utilities and extensions
 * **helpers/** — utility classes (waits, configuration, etc.)
 * **pages/** — Page Object classes
+* **testdata/** — shared constants reused across test scenarios
 * **tests/** — test scenarios
 
 ---
