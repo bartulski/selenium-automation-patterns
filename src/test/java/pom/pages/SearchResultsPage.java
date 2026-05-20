@@ -10,11 +10,8 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 public class SearchResultsPage extends BasePage {
-
-
-    By listOfAllProductTitles = By.cssSelector(".product h2");
-    By productsContainer = By.cssSelector(".products");
-
+    private final By listOfAllProductTitles = By.cssSelector(".product h2");
+    private final By productsContainer = By.cssSelector(".products");
 
     protected SearchResultsPage(WebDriver driver) {
         super(driver);

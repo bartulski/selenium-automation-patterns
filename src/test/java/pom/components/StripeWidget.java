@@ -5,7 +5,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pom.helpers.WaitUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WebDriver;
 
 import java.time.Duration;
@@ -35,15 +34,15 @@ public class StripeWidget {
             
             waitUtils.waitToDisappear(stripeAnimationLoader);
 
-            waitUtils.waitTobeClickable(stripeDevToolsButton).click();
+            waitUtils.waitToBeClickable(stripeDevToolsButton).click();
 
             waitUtils.waitToDisappear(stripeAnimationLoader);
 
             waitUtils.waitToAppear(stripeBottomRightPositionLocator);
 
-            waitUtils.waitTobeClickable(stripeDevToolsSettingsButton).click();
+            waitUtils.waitToBeClickable(stripeDevToolsSettingsButton).click();
 
-            waitUtils.waitTobeClickable(stripeDevToolsTopLeftCornerButton).click();
+            waitUtils.waitToBeClickable(stripeDevToolsTopLeftCornerButton).click();
 
             waitUtils.waitToAppear(stripeTopLeftPositionLocator);
 
