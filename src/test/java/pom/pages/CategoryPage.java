@@ -6,15 +6,13 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import pom.testdata.ProductData;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryPage extends BasePage {
-    private final String wspinaczkaSlug = "/wspinaczka/";
-    private final String windsurfingSlug = "/windsurfing/";
-
     private final By cartButton = By.cssSelector("a[title='Zobacz zawartość koszyka']");
     private final By regularPrices = By.cssSelector(".price > .amount > bdi");
     private final By promoPrices = By.cssSelector(".price ins bdi");
@@ -30,17 +28,16 @@ public class CategoryPage extends BasePage {
 
     @Step("Go to Wspinaczka category")
     public CategoryPage goToWspinaczkaCategory() {
-        driver.get(baseURL + "/product-category" + wspinaczkaSlug);
+        driver.get(baseURL + "/product-category" + ProductData.WSPINACZKA_SLUG);
         storeNotice.dismissStoreNotice();
         return this;
     }
     @Step("Go to Windsurfing category")
     public CategoryPage goToWindsurfingCategory() {
-        driver.get(baseURL + "/product-category" + windsurfingSlug);
+        driver.get(baseURL + "/product-category" + ProductData.WINDSURFING_SLUG);
         storeNotice.dismissStoreNotice();
         return this;
     }
-
 
     public List<BigDecimal> readAllCategoryPrices() {
         List<BigDecimal> pricesList = new ArrayList<>();
@@ -66,12 +63,12 @@ public class CategoryPage extends BasePage {
         List<WebElement> buttons = driver.findElements(listOfAddToCartButtons);
 
         for (WebElement element : buttons) {
-            waitToBeClickable(element);
-            element.click();
+            waitToBeClickable(element).click();
             waitForDisappear(blockUIOverlay);
         }
         return this;
     }
+
     @Step("Go to cart page")
     public CartPage goToCart() {
         clickElement(cartButton);
@@ -86,7 +83,7 @@ public class CategoryPage extends BasePage {
         waitToBeClickable(sortingDropdowns);
         getFirstSortingDropdown().click();
         clickElement(sortByPriceDescendingButton);
-        waitUtils.waitForURLContains("orderby=price-desc");
+        waitForUrlContains("orderby=price-desc");
         return this;
     }
 }

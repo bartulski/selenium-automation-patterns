@@ -87,4 +87,8 @@ public abstract class BasePage {
     protected WebElement waitToBeClickable(By locator) {
         return waitUtils.waitToBeClickable(locator);
     }
+
+    protected void waitForUrlContains(String textFragment) {
+        waitUtils.waitForURLContains(textFragment);
+    }
 }

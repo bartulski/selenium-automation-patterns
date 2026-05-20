@@ -75,8 +75,7 @@ public class HomePage extends BasePage {
     public SearchResultsPage searchFor(String searchKeyWord) {
         sendKeys(searchTextField, searchKeyWord);
         driver.findElement(searchTextField).sendKeys(Keys.ENTER);
-        waitUtils.waitForURLContains(searchKeyWord);
-
+        waitForUrlContains(searchKeyWord);
         return new SearchResultsPage(driver);
     }
 }

@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pom.testdata.CouponData;
-import pom.testdata.ProductData;
 
 import java.math.BigDecimal;
 import java.util.List;
