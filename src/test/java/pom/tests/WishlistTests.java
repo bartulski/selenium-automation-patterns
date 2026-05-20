@@ -9,19 +9,18 @@ import io.qameta.allure.Feature;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import pom.testdata.ProductData;
 
 
 @Epic("E-commerce")
 @Feature("Wishlist page")
 @DisplayName("Wishlist functionality")
 public class WishlistTests extends BaseTest {
-    String granKoscielcowProduct = "/gran-koscielcow/";
-
     @Test
     @DisplayName("Should display product in wishlist")
     void shouldDisplayProductInWishlist() {
         WishlistPage wishlistPage = new ProductPage(driver)
-                .openProductPage(granKoscielcowProduct)
+                .openProductPage(ProductData.GRAN_KOSCIELCOW_SLUG)
                 .addProductToWishlist()
                 .goToWishlistPage();
 

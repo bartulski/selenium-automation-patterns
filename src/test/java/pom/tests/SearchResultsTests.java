@@ -9,6 +9,7 @@ import io.qameta.allure.Feature;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import pom.testdata.ProductData;
 
 
 @Epic("E-commerce")
@@ -19,7 +20,7 @@ public class SearchResultsTests extends BaseTest {
     @Test
     @DisplayName("Should return matching products for search query")
     void shouldReturnMatchingProductsForSearchQuery() {
-        String searchKeyWord = "yoga";
+        String searchKeyWord = ProductData.SEARCH_KEYWORD_YOGA;
 
         SearchResultsPage searchResultsPage = new HomePage(driver)
                 .goToHomePage()

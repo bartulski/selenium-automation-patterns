@@ -10,6 +10,8 @@ import io.qameta.allure.Feature;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import pom.testdata.CouponData;
+import pom.testdata.ProductData;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -81,8 +83,7 @@ public class CartTests extends BaseTest {
 
         BigDecimal cartTotalValueBeforeDiscount = cartPage.readTotalCartAmount();
 
-        String couponTenPercentDiscount = "10procent";
-        cartPage.applyCoupon(couponTenPercentDiscount);
+        cartPage.applyCoupon(CouponData.VALID_10_PERCENT);
 
         BigDecimal actualCartValueWithDiscount = cartPage.readTotalCartAmount();
         BigDecimal expectedCartValueWithDiscount =
@@ -106,7 +107,7 @@ public class CartTests extends BaseTest {
                 .goToCartPage();
 
         BigDecimal cartValue = cartPage.readTotalCartAmount();
-        String invalidCoupon = "invalid";
+        String invalidCoupon = CouponData.INVALID;
 
         cartPage.applyCoupon(invalidCoupon);
         String couponErrorMessage = cartPage.readCouponErrorMessage();
@@ -120,7 +121,7 @@ public class CartTests extends BaseTest {
                         couponErrorMessage.contains(invalidCoupon)
                         , "Coupon text not present in error message"),
                 () -> Assertions.assertTrue(
-                        couponErrorMessage.contains("nie istnieje")
+                        couponErrorMessage.contains(CouponData.COUPON_NOT_FOUND_FRAGMENT)
                         , "Coupon text message is not correct")
         );
     }
