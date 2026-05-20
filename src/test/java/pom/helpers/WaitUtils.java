@@ -9,15 +9,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class WaitUtils {
-    private final WebDriver driver;
     private final WebDriverWait wait;
 
     public WaitUtils(WebDriver driver, int waitInSecs) {
-        this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(waitInSecs));
     }
 
-    public WebElement waitTobeClickable(By locator) {
+    public WebElement waitToBeClickable(By locator) {
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
@@ -32,7 +30,6 @@ public class WaitUtils {
     public void waitToAppear(By locator) {
         wait.until(ExpectedConditions.numberOfElementsToBe(locator, 1));
     }
-
 
     public void waitToDisappear(By locator) {
         wait.until(ExpectedConditions.numberOfElementsToBe(locator, 0));

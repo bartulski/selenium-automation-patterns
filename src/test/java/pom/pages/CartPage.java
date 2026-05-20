@@ -9,18 +9,16 @@ import org.openqa.selenium.WebDriver;
 import java.math.BigDecimal;
 
 public class CartPage extends BasePage  {
-
-    By totalCartValue = By.cssSelector("td[data-title='Suma'] strong");
-    By quantityInputField = By.cssSelector("[name*='[qty]']");
-    By updateCartButton = By.cssSelector(".actions button[name='update_cart']");
-    By blockingOverlay = By.cssSelector(".blockUI");
-    By couponInputField = By.cssSelector("#coupon_code");
-    By couponApplyButton = By.cssSelector("[name='apply_coupon']");
-    By removeProductButton = By.cssSelector(".product-remove a[role='button']");
-    By productsInCartList = By.cssSelector(".cart_item");
-    By emptyCartNotification = By.cssSelector(".woocommerce-notices-wrapper .cart-empty");
-    By couponErrorText = By.cssSelector(".coupon-error-notice");
-
+    private final By totalCartValue = By.cssSelector("td[data-title='Suma'] strong");
+    private final By quantityInputField = By.cssSelector("[name*='[qty]']");
+    private final By updateCartButton = By.cssSelector(".actions button[name='update_cart']");
+    private final By blockingOverlay = By.cssSelector(".blockUI");
+    private final By couponInputField = By.cssSelector("#coupon_code");
+    private final By couponApplyButton = By.cssSelector("[name='apply_coupon']");
+    private final By removeProductButton = By.cssSelector(".product-remove a[role='button']");
+    private final By productsInCartList = By.cssSelector(".cart_item");
+    private final By emptyCartNotification = By.cssSelector(".woocommerce-notices-wrapper .cart-empty");
+    private final By couponErrorText = By.cssSelector(".coupon-error-notice");
 
     public CartPage(WebDriver driver) {
         super(driver);

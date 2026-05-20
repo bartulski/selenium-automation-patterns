@@ -36,7 +36,7 @@ public abstract class BasePage {
     }
 
     protected void clickElement(By locator) {
-        WebElement element = waitUtils.waitTobeClickable(locator);
+        WebElement element = waitUtils.waitToBeClickable(locator);
         element.click();
     }
 
@@ -50,18 +50,9 @@ public abstract class BasePage {
         element.sendKeys(value);
     }
 
-    protected String readText(By locator) {
-        return waitUtils.waitForVisibility(locator).getText();
-    }
-
     protected void clearInputField(By locator) {
         WebElement element = waitUtils.waitForVisibility(locator);
         element.clear();
-    }
-
-    protected int getListSize(By locator) {
-        waitForVisibility(locator);
-        return driver.findElements(locator).size();
     }
 
     protected void goToProductPage(String productSlug) {
@@ -70,13 +61,17 @@ public abstract class BasePage {
         storeNotice.dismissStoreNotice();
     }
 
+    protected String readText(By locator) {
+        return waitUtils.waitForVisibility(locator).getText();
+    }
+
     protected BigDecimal convertStringToBigDecimal(By locator) {
         waitUtils.waitForVisibility(locator);
         String readString = readText(locator).replaceAll("[^\\d,.-]", "");
         return new BigDecimal(readString.replace(",", "."));
     }
 
-    //Domain waits:
+    // Generic wait wrappers
     protected void waitForDisappear(By locator) {
         waitUtils.waitToDisappear(locator);
     }
@@ -90,6 +85,6 @@ public abstract class BasePage {
     }
 
     protected WebElement waitToBeClickable(By locator) {
-        return waitUtils.waitTobeClickable(locator);
+        return waitUtils.waitToBeClickable(locator);
     }
 }

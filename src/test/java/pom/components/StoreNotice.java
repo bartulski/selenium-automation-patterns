@@ -18,7 +18,7 @@ public class StoreNotice {
 
     public void dismissStoreNotice() {
         waitUtils.waitForVisibility(storeNoticePanel);
-        waitUtils.waitTobeClickable(storeNoticeDismissButton).click();
+        waitUtils.waitToBeClickable(storeNoticeDismissButton).click();
         waitUtils.waitToBeInvisible(storeNoticePanel);
     }
 }
