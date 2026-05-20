@@ -8,6 +8,7 @@ import io.qameta.allure.Feature;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import pom.testdata.UiExpectedData;
 
 import java.math.BigDecimal;
 
@@ -22,7 +23,7 @@ public class HomeTests extends BaseTest {
         HomePage homePage = new HomePage(driver)
                 .goToHomePage();
 
-        String expectedPageTitle = "FakeStore – Sklep do nauki testowania";
+        String expectedPageTitle = UiExpectedData.HOME_PAGE_TITLE;
         String expectedPageURL = configuration.getBaseURL().replaceAll("/+$", "");
         String actualURL = homePage.readCurrentUrl().replaceAll("/+$", "");
 

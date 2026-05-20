@@ -3,12 +3,14 @@ package pom.tests;
 import pom.core.BaseTest;
 import pom.pages.HomePage;
 import pom.pages.ProductPage;
+import pom.testdata.ProductData;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 
 import java.math.BigDecimal;
 
@@ -17,7 +19,6 @@ import java.math.BigDecimal;
 @Feature("Product page")
 @DisplayName("Product page functionality")
 public class ProductTests extends BaseTest {
-    String windsurfingSlug = "/windsurfing-w-lanzarote-costa-teguise/";
 
     @Test
     @DisplayName("Should update cart prices after adding product")
@@ -51,7 +52,7 @@ public class ProductTests extends BaseTest {
     @DisplayName("Should recalculate total price when changing quantity")
     void shouldRecalculateTotalPriceWhenChangingQuantity() {
         ProductPage productPage = new ProductPage(driver)
-                .openProductPage(windsurfingSlug);
+                .openProductPage(ProductData.WINDSURFING_LANZAROTE_SLUG);
 
         BigDecimal productPrice = productPage
                 .readProductPrice();
@@ -77,7 +78,7 @@ public class ProductTests extends BaseTest {
         int quantityNegativeValue = -1;
 
         ProductPage productPage = new ProductPage(driver)
-                .openProductPage(windsurfingSlug)
+                .openProductPage(ProductData.WINDSURFING_LANZAROTE_SLUG)
                 .setRawQuantity(quantityNegativeValue)
                 .clickAddToCart();
 
