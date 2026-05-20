@@ -104,7 +104,6 @@ public class ProductPage extends BasePage {
     public WishlistPage goToWishlistPage() {
         String originalWindow = driver.getWindowHandle();
         clickElement(wishListButton);
-
         windowHelper.switchToNewWindow(originalWindow);
         return new WishlistPage(driver);
     }

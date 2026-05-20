@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 
 
 public class WishlistPage extends BasePage {
-    By wishlistProductList = By.cssSelector(".wishlist-items-wrapper tr");
+    private final By wishlistProductList = By.cssSelector(".wishlist-items-wrapper tr");
 
     protected WishlistPage(WebDriver driver) {
         super(driver);
